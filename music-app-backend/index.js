@@ -3,12 +3,13 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const router = require('./routes/songs.routes');
 const config = require('./config/config');
-const errorHandler = require('./middlewares/errorHandler')
+const { errorHandler, errorConverter } = require('./middlewares/error')
 
 const app = express();
 
 app.use(express.json());
 app.use(router);
+app.use(errorConverter)
 app.use(errorHandler);
 
 // Connect to MongoDB
