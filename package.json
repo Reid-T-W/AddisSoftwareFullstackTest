@@ -1,0 +1,24 @@
+{
+  "name": "addissoftwarefullstacktest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky",
+    "pre-commit": "cd ./music-app-backend && npm run pre-commit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Reid-T-W/AddisSoftwareFullstackTest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Reid-T-W/AddisSoftwareFullstackTest/issues"
+  },
+  "homepage": "https://github.com/Reid-T-W/AddisSoftwareFullstackTest#readme",
+  "devDependencies": {
+    "husky": "^9.1.5"
+  }
+}
