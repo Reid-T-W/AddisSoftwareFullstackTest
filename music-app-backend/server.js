@@ -3,10 +3,12 @@ const router = require('./routes/songs.routes');
 const { errorHandler, errorConverter } = require('./middlewares/error')
 const ApiError = require('./utils/apiError');
 const httpStatus = require('http-status');
+const morgan = require('./config/morgan')
 
 const app = express();
 
 app.use(express.json());
+app.use(morgan);
 app.use(router);
 // Handling non existent routes
 app.use((req, res, next) => {
