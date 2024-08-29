@@ -1,4 +1,4 @@
-const joi = require('joi');
+const logger = require('./logger');
 require('dotenv').config();
 const envVarsSchema = require('./../validations/env.validation');
 

@@ -18,6 +18,8 @@ const catchAsync = require('../utils/catchAsync.js');
  *
  * @throws {BadRequest} If the request body is empty.
  */
+
+// eslint-disable-next-line no-unused-vars
 const createSong = catchAsync(async (req, res, next) => {
   await Song.create(req.body);
   res.status(201).send({ success: true, message: 'Song created successfully' });
@@ -32,6 +34,8 @@ const createSong = catchAsync(async (req, res, next) => {
  *
  * @throws {InternalServerError} If there's an issue with the database or server.
  */
+
+// eslint-disable-next-line no-unused-vars
 const getSongs = catchAsync(async (req, res, next) => {
   const songs = await Song.find({});
   res.json(songs);

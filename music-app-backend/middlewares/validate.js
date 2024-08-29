@@ -1,4 +1,3 @@
-const joi = require('joi');
 const ApiError = require('./../utils/apiError');
 const logger = require('./../config/logger');
 
@@ -8,6 +7,8 @@ const validate = (schema) => (req, res, next) => {
   const data = req.body;
 
   // Validate the object against the schema
+
+  // eslint-disable-next-line no-unused-vars
   const { value, error } = schema.validate(data, { abortEarly: false });
 
   // If there is an error, respond with a 400 status and the error
