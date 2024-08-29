@@ -1,5 +1,6 @@
 const joi = require('joi')
 const ApiError = require('./../utils/apiError')
+const logger = require('./../config/logger');
 
 // Middleware function to validate the request agains a schema
 const validate = (schema) => (req, res, next) => {
@@ -13,7 +14,7 @@ const validate = (schema) => (req, res, next) => {
     // If there is an error, respond with a 400 status and the error
     // details
     if (error) {
-        console.log("error: ", error)
+        logger.error("error: ", error)
         const errors = error.details.map((detail) => detail.message).join(',');
         next(new ApiError(400, errors));
     }

@@ -34,6 +34,7 @@ const createSong = catchAsync(async (req, res, next) => {
  * @throws {InternalServerError} If there's an issue with the database or server.
  */
 const getSongs = catchAsync( async (req, res, next) => {
+        hello();
         const songs = await Song.find({});
         res.json(songs);
 });

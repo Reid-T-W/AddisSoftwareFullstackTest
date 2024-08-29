@@ -2,6 +2,7 @@ const config = require('../config/config');
 const httpStatus = require('http-status');
 const ApiError = require('./../utils/apiError');
 const mongoose = require('mongoose');
+const logger = require('./../config/logger');
 
 /**
  * A function that checks the type of error, and converts
@@ -53,7 +54,7 @@ const errorHandler = (err, req, res, next) => {
         ...(config.env === 'development' && { stack: err.stack }),
     }
     if (config.env === 'development') {
-        console.log(err);
+        logger.error(err);
     }
     res.status(statusCode).send(response);
 };

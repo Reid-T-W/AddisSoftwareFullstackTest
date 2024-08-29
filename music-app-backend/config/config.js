@@ -6,7 +6,7 @@ const envVarsSchema = require('./../validations/env.validation')
 const { error, value: envVars } = envVarsSchema.validate(process.env);
 
 if (error) {
-    console.error(`Config validation error: ${error.message}`)
+    logger.error(`Config validation error: ${error.message}`)
 }
 
 module.exports = {
