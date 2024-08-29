@@ -5,4 +5,5 @@ export NVM_DIR="$HOME/.nvm"
 # Use the Node.js version specified in .nvmrc
 nvm use
 
+# Run pre commit command
 npm run pre-commit
