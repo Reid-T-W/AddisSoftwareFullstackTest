@@ -6,6 +6,7 @@
  * - DB_URL: Database connection string.
  */
 const Song = require('../models/song.model.js');
+const catchAsync = require('../utils/catchAsync.js');
 
 
 /**
@@ -18,15 +19,10 @@ const Song = require('../models/song.model.js');
  * 
  * @throws {BadRequest} If the request body is empty.
  */
-const createSong = async (req, res) => {
-    try {
-        await Song.create(req.body);
-        res.status(201).send({ success: true, message: 'Song created successfully' });
-    } catch (error) {
-        console.error(error);
-        res.send({ error: true, message: error.message });
-    }
-}
+const createSong = catchAsync(async (req, res, next) => {
+    await Song.create(req.body);
+    res.status(201).send({ success: true, message: 'Song created successfully' });
+})
 /**
  * Get list of songs.
  * 
@@ -37,14 +33,10 @@ const createSong = async (req, res) => {
  * 
  * @throws {InternalServerError} If there's an issue with the database or server.
  */
-const getSongs = async (req, res) => {
-    try {
+const getSongs = catchAsync( async (req, res, next) => {
         const songs = await Song.find({});
         res.json(songs);
-    } catch (error) {
-        res.send({ error: true, message: error.message });
-    }
-};
+});
 
 module.exports = { createSong, getSongs };
 
