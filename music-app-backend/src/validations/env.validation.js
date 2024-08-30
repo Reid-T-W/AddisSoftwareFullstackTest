@@ -6,6 +6,7 @@ const envVarsSchema = joi
     DB_CONNECTION: joi.string().required(),
     PORT: joi.number().default(8000),
     NODE_ENV: joi.string().required(),
+    SERVER_HOST: joi.string().required()
   })
   .unknown();
 

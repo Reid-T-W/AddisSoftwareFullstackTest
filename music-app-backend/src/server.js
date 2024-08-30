@@ -1,15 +1,17 @@
 const express = require('express');
-const router = require('./routes/songs.routes');
+const apiRoutes = require('./routes');
 const { errorHandler, errorConverter } = require('./middlewares/error')
 const ApiError = require('./utils/apiError');
 const httpStatus = require('http-status');
-const morgan = require('./config/morgan')
+const morgan = require('./config/morgan');
+const SwaggerDocs = require('./utils/swagger/swagger');
 
 const app = express();
 
 app.use(express.json());
 app.use(morgan);
-app.use(router);
+app.use('/api/v1', apiRoutes);
+SwaggerDocs(app);
 // Handling non existent routes
 app.use((req, res, next) => {
     next(new ApiError(httpStatus.NOT_FOUND, 'Not found'));
