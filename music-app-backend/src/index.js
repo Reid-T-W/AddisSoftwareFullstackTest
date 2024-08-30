@@ -6,40 +6,40 @@ const logger = require('./config/logger');
 
 // Connect to MongoDB
 mongoose
-    .connect(config.dbConnection)
-    .then(() => {
-        logger.info('Connected to MongoDB');
-    })
-    .catch(err=>{
-        logger.error(err)
-    })
+  .connect(config.dbConnection)
+  .then(() => {
+    logger.info('Connected to MongoDB');
+  })
+  .catch((err) => {
+    logger.error(err);
+  });
 
 const httpServer = http.createServer(app);
 const server = httpServer.listen(config.port, () => {
-    logger.info(`server listening on port ${config.port}`);
-  });
+  logger.info(`server listening on port ${config.port}`);
+});
 
 const exitHandler = () => {
-    if (server) {
-        server.close(() => {
-          logger.info('Server closed');
-          process.exit(1);
-        });
-      } else {
-        process.exit(1);
-      }
+  if (server) {
+    server.close(() => {
+      logger.info('Server closed');
+      process.exit(1);
+    });
+  } else {
+    process.exit(1);
+  }
 };
 
 const unExpectedErrorHandler = (error) => {
-    logger.error(error);
-    exitHandler();
-  };
+  logger.error(error);
+  exitHandler();
+};
 
 process.on('uncaughtException', unExpectedErrorHandler);
 process.on('unhandledRejection', unExpectedErrorHandler);
 process.on('SIGTERM', () => {
-    logger.info('SIGTERM RECIEVED');
-    if (server) {
-        server.close();
-    }
+  logger.info('SIGTERM RECIEVED');
+  if (server) {
+    server.close();
+  }
 });
