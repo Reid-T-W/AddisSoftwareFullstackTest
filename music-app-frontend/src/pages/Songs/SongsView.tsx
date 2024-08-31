@@ -47,9 +47,9 @@ const SongsView = () => {
         <Search placeholder={"Search songs by name, artist, album, or genre"}/>
         <ButtonStyled 
           onClick={handleClick}
-          color={addSong? 'orange' : '#636363'}
+          color={'#636363'}
         >
-          {addSong? 'Save' : 'Add Song'}
+          {addSong? 'Close' : 'Add Song'}
         </ButtonStyled>
       </RowContainer>
       {addSong && <AddSong setSong={setSong}/>}

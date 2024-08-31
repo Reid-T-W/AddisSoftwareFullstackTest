@@ -18,13 +18,18 @@ const InputDisplayStyled = emotionStyled.input`
     margin: 2rem;
 `
 
-const Container = emotionStyled.div`
+// const Container = emotionStyled.div`
+//   display: flex;
+//   flex-direction: column;
+//   max-width: 50%;
+//   justify-content: center;
+//   margin-top: 2rem;
+//   margin-bottom: 1rem;
+// `;
+
+const FormStyled = emotionStyled.form`
   display: flex;
-  flex-direction: row;
-  max-width: 50%;
-  justify-content: center;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  flex-direction: column;
 `;
 
 
@@ -47,7 +52,7 @@ const AddSong:React.FC<AddSongProps> = ({setSong}) => {
         artist: '',
         album: '',
         genre: '',
-        };
+    };
 
     const validationSchema = Yup.object({
         song: Yup.string().max(50).required('Song Title is required'),
@@ -79,8 +84,8 @@ const AddSong:React.FC<AddSongProps> = ({setSong}) => {
 
   return (
     <>
-        <Container>
-            <form onSubmit={formik.handleSubmit}>
+        {/* <Container> */}
+            <FormStyled onSubmit={formik.handleSubmit}>
                 {/* Song Title Input */}
                 <InputDisplayStyled 
                     name='song' 
@@ -153,8 +158,8 @@ const AddSong:React.FC<AddSongProps> = ({setSong}) => {
                 <ButtonStyled color="orange">
                     Save
                 </ButtonStyled>
-            </form>
-        </Container>
+            </FormStyled>
+        {/* </Container> */}
     </>
   )
 }
