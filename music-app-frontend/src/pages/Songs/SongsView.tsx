@@ -4,6 +4,7 @@ import emotionStyled from '@emotion/styled';
 import { ButtonStyled } from '../../components/ui/Button';
 import AddSong from './AddSong';
 import SongsList from './SongsList';
+import { ISong } from '../../types/song';
 
 const Container = emotionStyled.div`
   display: flex;
@@ -34,6 +35,7 @@ const RowContainer = emotionStyled.div`
 const SongsView = () => {
   
   const [addSong, setAddSong] = useState(false)
+  const [song, setSong] = useState<ISong>()
 
   const handleClick = () => {
     setAddSong(!addSong);
@@ -50,7 +52,7 @@ const SongsView = () => {
           {addSong? 'Save' : 'Add Song'}
         </ButtonStyled>
       </RowContainer>
-      {addSong && <AddSong />}
+      {addSong && <AddSong setSong={setSong}/>}
       <ScrollableBox>
         <SongsList />
       </ScrollableBox>
