@@ -1,9 +1,13 @@
-import React from 'react'
 import emotionStyled from '@emotion/styled';
 
-const ButtonStyled = emotionStyled.button`
+
+interface ButtonStyledProps {
+    color: string;
+}
+
+export const ButtonStyled = emotionStyled.button<ButtonStyledProps>`
     border: none;
-    background-color: #636363;
+    background-color: ${props => props.color};
     color: #fff;
     padding: 8px 16px;
     border-radius: 4px;
@@ -11,19 +15,6 @@ const ButtonStyled = emotionStyled.button`
     font-size: 20px;
     height: 60px;
     &:hover{
-      background-color: #242424
+      opacity: 0.5
     }
 `
-export interface ButtonProps {
-    value: string;
-}
-
-const Button:React.FC<ButtonProps> = ({value}) => {
-  return (
-    <ButtonStyled>
-        {value}
-    </ButtonStyled>
-  )
-}
-
-export default Button;

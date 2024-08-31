@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Search from '../../components/ui/Search'
 import SongsView from './SongsView';
 import emotionStyled from '@emotion/styled';
-import Button from '../../components/ui/Button';
+import { ButtonStyled } from '../../components/ui/Button';
 import AddSong from './AddSong';
 
 const Container = emotionStyled.div`
@@ -30,15 +30,27 @@ const RowContainer = emotionStyled.div`
   justify-content: center;
   align-items: baseline;
 `
-
+ 
 const Songs = () => {
+  
+  const [addSong, setAddSong] = useState(false)
+
+  const handleClick = () => {
+    setAddSong(!addSong);
+  };
+
   return (
     <Container>
       <RowContainer>
         <Search placeholder={"Search songs by name, artist, album, or genre"}/>
-        <Button value={"Add Song"}/>
+        <ButtonStyled 
+          onClick={handleClick}
+          color={addSong? 'orange' : '#636363'}
+        >
+          {addSong? 'Save' : 'Add Song'}
+        </ButtonStyled>
       </RowContainer>
-      <AddSong />
+      {addSong && <AddSong />}
       <ScrollableBox>
         <SongsView />
       </ScrollableBox>

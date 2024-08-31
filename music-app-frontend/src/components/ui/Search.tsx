@@ -2,7 +2,7 @@ import React from 'react'
 
 // import styled from '@emotion/styled';
 import emotionStyled from '@emotion/styled';
-import Button from './Button';
+import { ButtonStyled } from './Button';
 
 const SearchBoxWrapper = emotionStyled.div`
   display: flex;
@@ -33,7 +33,9 @@ const Search:React.FC<SearchProps> = ({ placeholder }) => {
       <Input
         placeholder={`${placeholder}...`}
       />
-      <Button value={"Search"}/>
+      <ButtonStyled color={'#636363'}>
+        Search
+      </ButtonStyled>
     </SearchBoxWrapper>
 );
 }
