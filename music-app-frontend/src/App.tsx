@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { ToastContainer } from 'react-toastify';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from '@emotion/react';
+// import { Provider } from 'react-redux';
+import Layout from './components/Layout';
+import Songs from './pages/Songs';
+import Albums from './pages/Albums';
+import Artists from './pages/Artists';
+import Genres from './pages/Genres';
+
+const theme = {
+  colors: {
+    primary: '242424',
+    secondary: 'gray',
+  },
+  space: [0, 4, 8, 16, 32, 64],
+  fonts: {
+    body: 'system-ui, sans-serif',
+    heading: 'Georgia, serif',
+  },
+};
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <ToastContainer />
+        {/* <Provider store={store}> */}
+          <head>
+            <title>{'MusicApp'}</title>
+            <meta name="viewport" content="initial-scale=1, width=device-width" />
+          </head>
+          <ThemeProvider theme={theme}>
+          {/* <GlobalStyle /> */}
+            <BrowserRouter>
+              <Layout>
+                <Routes>
+                  <Route path="/" element={<Songs />} />
+                  <Route path="/albums" element={<Albums />} />
+                  <Route path="/artists" element={<Artists />} />
+                  <Route path="/genres" element={<Genres />} />
+                </Routes>
+              </Layout>
+                {/* <redirect to="/404" /> */}
+            </BrowserRouter>
+          </ThemeProvider>
+        {/* </Provider> */}
     </>
   )
 }
 
-export default App
+export default App;
