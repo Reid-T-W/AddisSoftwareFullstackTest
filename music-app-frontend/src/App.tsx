@@ -8,6 +8,7 @@ import Songs from './pages/Songs';
 import Albums from './pages/Albums';
 import Artists from './pages/Artists';
 import Genres from './pages/Genres';
+import SongDetailsView from './pages/Songs/SongDetailsView';
 
 const theme = {
   colors: {
@@ -38,6 +39,7 @@ function App() {
               <Layout>
                 <Routes>
                   <Route path="/" element={<Songs />} />
+                  <Route path="/songs/:id" element={<SongDetailsView />} />
                   <Route path="/albums" element={<Albums />} />
                   <Route path="/artists" element={<Artists />} />
                   <Route path="/genres" element={<Genres />} />

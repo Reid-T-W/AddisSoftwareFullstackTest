@@ -18,24 +18,13 @@ const InputDisplayStyled = emotionStyled.input`
     margin: 2rem;
 `
 
-// const Container = emotionStyled.div`
-//   display: flex;
-//   flex-direction: column;
-//   max-width: 50%;
-//   justify-content: center;
-//   margin-top: 2rem;
-//   margin-bottom: 1rem;
-// `;
-
 const FormStyled = emotionStyled.form`
   display: flex;
   flex-direction: column;
 `;
 
-
-
 interface AddSongProps {
-    setSong: React.Dispatch<React.SetStateAction<ISong | undefined>>
+    setSong?: React.Dispatch<React.SetStateAction<ISong | undefined>>
 }
 
 const AddSong:React.FC<AddSongProps> = ({setSong}) => {
