@@ -4,7 +4,9 @@ import emotionStyled from '@emotion/styled';
 import { ButtonStyled } from '../../components/ui/Button';
 import AddSong from './AddSong';
 import SongsList from './SongsList';
-import { ISong } from '../../types/song';
+import { ISong } from '../../types';
+import { useAppSelector } from '../../redux/hooks';
+import { RootState } from '../../redux/store';
 
 const Container = emotionStyled.div`
   display: flex;
@@ -36,6 +38,7 @@ const SongsView = () => {
   
   const [addSong, setAddSong] = useState(false)
   const [song, setSong] = useState<ISong>()
+
 
   const handleClick = () => {
     setAddSong(!addSong);

@@ -1,11 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from '@emotion/styled';
 import { 
     SONGS_ROUTE,
     ARTISTS_ROUTE,
     ALBUMS_ROUTE,
     GENRES_ROUTE
-} from '../../../utils/constants';
+} from '../../utils/constants/routes';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { RootState } from '../../redux/store';
+import { setSelectedTab } from '../../redux/features/settings/settings.slice';
+import { useNavigate } from 'react-router-dom';
+
+interface MenuItemProps {
+  color: string;
+}
+
+interface HandleClickedProps {
+  route: string,
+  tab: string
+}
 
 const HorizontalMenuContainer = styled.div`
   display: flex;
@@ -16,12 +29,13 @@ const HorizontalMenuContainer = styled.div`
   text-align: center;
 `;
 
-const MenuItem = styled.a`
-  color: #fff;
+const MenuItem = styled.a<MenuItemProps>`
+  color: ${props => props.color};
   text-decoration: none;
   margin-right: 1rem;
   padding-right: 1rem;
   border-right: 1px solid #ccc;
+  cursor: pointer;
 
   &:last-child {
     margin-right: 0;
@@ -35,19 +49,56 @@ const MenuItem = styled.a`
 `;
 
 const HorizontalMenu = () => {
+  const navigate = useNavigate();
+  const selectedTab = useAppSelector((state: RootState) => state.settings.selectedTab)
+  const dispatch = useAppDispatch();
+  
+  const handleClick = (data: HandleClickedProps) => {
+    navigate(data.route);
+    dispatch(setSelectedTab(data.tab));
+  }
+
+
   return (
     <HorizontalMenuContainer>
-
-        <MenuItem href={SONGS_ROUTE}>
-            <h3>Songs</h3>
+        <MenuItem 
+          color={selectedTab === 'songs' ? 'orange' : 'white'} 
+          onClick={() => handleClick({
+              route: SONGS_ROUTE,
+              tab: 'songs'
+            })
+          }
+        >
+          <h3>Songs</h3>
         </MenuItem>
-        <MenuItem href={ARTISTS_ROUTE}>
-            <h3>Artists</h3>
+        <MenuItem 
+          color={selectedTab === 'artists' ? 'orange' : 'white'} 
+          onClick={() => handleClick({
+              route: ARTISTS_ROUTE,
+              tab: 'artists'
+            })
+          }
+        >
+          <h3>Artists</h3>
         </MenuItem>
-        <MenuItem href={ALBUMS_ROUTE}>
-            <h3>Albums</h3>
+        <MenuItem 
+          color={selectedTab === 'albums' ? 'orange' : 'white'}
+          onClick={() => handleClick({
+            route: ALBUMS_ROUTE,
+            tab: 'albums'
+          })
+        }
+        >
+          <h3>Albums</h3>
         </MenuItem>
-        <MenuItem href={GENRES_ROUTE}>
+        <MenuItem 
+          color={selectedTab === 'genres' ? 'orange' : 'white'}
+          onClick={() => handleClick({
+            route: GENRES_ROUTE,
+            tab: 'genres'
+          })
+        }
+        >
             <h3>Genres</h3>
         </MenuItem>
     </HorizontalMenuContainer>

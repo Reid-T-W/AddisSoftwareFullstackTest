@@ -1,6 +1,7 @@
 import emotionStyled from '@emotion/styled';
 import { FaArrowTrendUp } from "react-icons/fa6";
 import React from 'react'
+import { ISong } from '../../../types';
 
 interface CardContentProps {
   stats?: boolean;
@@ -39,18 +40,19 @@ const IndividualHeadings = emotionStyled.p`
 
 export interface CardProps {
   type: string;
+  song?: ISong;
   content?: string;
 }
 
 
-const songCard = () => {
+const songCard = (song: ISong) => {
   return (
     <CardContent>
-      <h3>Title</h3>
+      <h3>{song.title}</h3>
       <AdditionalContainer>
-          <IndividualHeadings>Artist</IndividualHeadings>
-          <IndividualHeadings>Album</IndividualHeadings>
-          <IndividualHeadings>Genre</IndividualHeadings>
+          <IndividualHeadings>{song.artist}</IndividualHeadings>
+          <IndividualHeadings>{song.album}</IndividualHeadings>
+          <IndividualHeadings>{song.genre}</IndividualHeadings>
       </AdditionalContainer>
     </CardContent>
   )
@@ -65,12 +67,14 @@ const statsCard = (content: string) => {
   )
 }
 
-const Card:React.FC<CardProps> = ({type, content}) => {
+const Card:React.FC<CardProps> = ({type, song, content}) => {
   return (
     <>
-      {type === "songs" && songCard()}
+      {/* If type of card is songs and song is not undefined, 
+      then display songCard. If type of card is stats, then
+       display statsCard. */}
+      {type === "songs" && song && songCard(song)}
       {type === "stats" && statsCard(content?content:'')}
-      {/* {type === "songs" && songCard} */}
     </>
   )
 }

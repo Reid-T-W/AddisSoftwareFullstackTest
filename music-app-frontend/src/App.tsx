@@ -8,7 +8,9 @@ import Songs from './pages/Songs';
 import Albums from './pages/Albums';
 import Artists from './pages/Artists';
 import Genres from './pages/Genres';
+import { Provider } from 'react-redux';
 import SongDetailsView from './pages/Songs/SongDetailsView';
+import store from './redux/store';
 
 const theme = {
   colors: {
@@ -28,7 +30,7 @@ function App() {
   return (
     <>
       <ToastContainer />
-        {/* <Provider store={store}> */}
+        <Provider store={store}>
           <head>
             <title>{'MusicApp'}</title>
             <meta name="viewport" content="initial-scale=1, width=device-width" />
@@ -48,7 +50,7 @@ function App() {
                 {/* <redirect to="/404" /> */}
             </BrowserRouter>
           </ThemeProvider>
-        {/* </Provider> */}
+        </Provider>
     </>
   )
 }
