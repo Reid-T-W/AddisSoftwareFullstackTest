@@ -6,6 +6,7 @@
  *  get:
  *   tags:
  *     - Songs
+ *   summary: Get list of songs
  *   description: Get all songs
  *   responses:
  *    200:

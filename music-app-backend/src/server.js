@@ -5,9 +5,14 @@ const ApiError = require('./utils/apiError');
 const httpStatus = require('http-status');
 const morgan = require('./config/morgan');
 const SwaggerDocs = require('./utils/swagger/swagger');
+const cors = require('cors');
 
 const app = express();
 
+const corsOptions = {
+  origin: 'http://localhost:5173',
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(morgan);
 app.use('/api/v1', apiRoutes);
