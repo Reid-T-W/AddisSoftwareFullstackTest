@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Search from '../../components/ui/Search';
 import emotionStyled from '@emotion/styled';
 import { ButtonStyled } from '../../components/ui/Button';
-import AddSong from './AddSong';
+import SongForm from './SongForm';
 import SongsList from './SongsList';
 import { ISong } from '../../types';
 import { useAppSelector } from '../../redux/hooks';
@@ -55,7 +55,7 @@ const SongsView = () => {
           {addSong? 'Close' : 'Add Song'}
         </ButtonStyled>
       </RowContainer>
-      {addSong && <AddSong setSong={setSong}/>}
+      {addSong && <SongForm type={'addSongForm'} />}
       <ScrollableBox>
         <SongsList />
       </ScrollableBox>

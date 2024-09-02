@@ -2,14 +2,17 @@ import { ISong } from '../../types';
 import { SongActions } from '../../utils/constants/actions';
 import { SagaIterator } from 'redux-saga';
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { addSongApiCall, getSongsApiCall } from '../api/songs.api';
+import { addSongApiCall, getSongDetailsApiCall, getSongsApiCall } from '../api/songs.api';
 import {
     fetchSongsRequested,
     fetchSongsSucceeded,
     fetchSongsFailed,
     addSongRequested,
     addSongSucceeded,
-    addSongFailed
+    addSongFailed,
+    fetchSongDetailsRequested,
+    fetchSongDetailsSucceeded,
+    fetchSongDetailsFailed
 }from '../features/songs/songs.slice'
 import { fetchStatsWorker } from './stats.saga'
 
@@ -42,6 +45,17 @@ function* addSongWorker(action: any): SagaIterator {
   }
 }
 
+// worker saga: will be fired on GET_SONG_DETAILS_REQUESTED actions
+function* fetchSongDetailsWorker(action: any): SagaIterator {
+  try {
+    yield put (fetchSongDetailsRequested());
+    const song: ISong = yield call(getSongDetailsApiCall, action.payload)
+    yield put(fetchSongDetailsSucceeded(song))
+  } catch (e: any) {
+    yield put(fetchSongDetailsFailed(e.message))
+  }
+}
+
 
 export function* songSagas() {
     // Handles actions related to songs
@@ -50,4 +64,5 @@ export function* songSagas() {
     // yield takeLatest(SongActions.DELETE_SONG_REQUESTED, deleteSongWorker)
     yield takeLatest(SongActions.ADD_SONG_REQUESTED, addSongWorker)
     // yield takeLatest(SongActions.SERCH_SONG_REQUESTED, searchSongWorker)
+    yield takeLatest(SongActions.GET_SONG_DETAILS_REQUESTED, fetchSongDetailsWorker)
 }

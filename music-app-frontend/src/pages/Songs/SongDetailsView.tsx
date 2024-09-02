@@ -1,5 +1,5 @@
 import React from 'react'
-import AddSong from './AddSong'
+import SongForm from './SongForm'
 import { ButtonStyled } from '../../components/ui/Button';
 import { MdDelete } from "react-icons/md";
 import emotionStyled from '@emotion/styled';
@@ -61,7 +61,7 @@ const SongDetailsView = () => {
                     </IconButton>
                 </RowContainer>
             </RowContainer>
-            <AddSong />
+            <SongForm type={'editSongForm'}/>
         </Container>
 
     </>

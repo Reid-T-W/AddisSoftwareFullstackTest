@@ -1,5 +1,6 @@
 import './App.css'
 import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from '@emotion/react';
 // import { Provider } from 'react-redux';
@@ -29,7 +30,9 @@ function App() {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer
+        closeOnClick
+      />
         <Provider store={store}>
           <head>
             <title>{'MusicApp'}</title>
