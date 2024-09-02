@@ -4,6 +4,8 @@ import { ISong } from '../../types/song';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { ButtonStyled } from '../../components/ui/Button';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { RootState } from '../../redux/store';
 
 const InputDisplayStyled = emotionStyled.input`
     background: none;
@@ -28,23 +30,25 @@ interface AddSongProps {
 }
 
 const AddSong:React.FC<AddSongProps> = ({setSong}) => {
-
+    const addingSong = useAppSelector((state: RootState) => state.songs.addingSong)
+    const songAdded = useAppSelector((state: RootState) => state.songs.songAdded)
+    const dispatch = useAppDispatch();
     interface FormValues {
-        song: string;
+        title: string;
         artist: string;
         album : string;
         genre : string;
     }
 
     const initialValues: FormValues = {
-        song: '',
+        title: '',
         artist: '',
         album: '',
         genre: '',
     };
 
     const validationSchema = Yup.object({
-        song: Yup.string().max(50).required('Song Title is required'),
+        title: Yup.string().max(50).required('Song Title is required'),
         artist: Yup.string().max(50).required('Artist is required'),
         album: Yup.string().max(50).required('Album is required'),
         genre: Yup.string().max(50).required('Genre is required'),    
@@ -54,20 +58,12 @@ const AddSong:React.FC<AddSongProps> = ({setSong}) => {
     const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async (values) => {
-        console.log("values: ", values)
-        console.log("submitted");
-        // const req = {
-        // user_id: customer?.users_id,
-        // is_active: values.is_active,
-        // };
-
-        // try {
-        // const res = await updateSubscriber(req).unwrap();
-        // console.log('RESS', res);
-        // } catch (error) {
-        // console.log('ERRORR', error);
-        // }
+    onSubmit: async (values, { resetForm }) => {
+        dispatch({type: 'ADD_SONG_REQUESTED', payload: values})
+        if (songAdded && addingSong === false) {
+            // Reset form
+            resetForm();
+        }
         },
     });
 
@@ -77,18 +73,18 @@ const AddSong:React.FC<AddSongProps> = ({setSong}) => {
             <FormStyled onSubmit={formik.handleSubmit}>
                 {/* Song Title Input */}
                 <InputDisplayStyled 
-                    name='song' 
+                    name='title' 
                     type='text' 
                     placeholder='Title' 
-                    value={formik.values.song}
+                    value={formik.values.title}
                     onChange={formik.handleChange}
                 />
                 {/* Handle error related to Song title */}
-                {formik.touched.song && 
-                 formik.errors.song && 
-                 typeof formik.errors.song === 'string' ? (
+                {formik.touched.title && 
+                 formik.errors.title && 
+                 typeof formik.errors.title === 'string' ? (
                     <div style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>
-                        {formik.errors.song}
+                        {formik.errors.title}
                     </div>
                 ) : null}
                 
@@ -100,7 +96,7 @@ const AddSong:React.FC<AddSongProps> = ({setSong}) => {
                     value={formik.values.artist}
                     onChange={formik.handleChange}
                 />
-                {/* Handle error related to Song title */}
+                {/* Handle error related to Artist */}
                 {formik.touched.artist && 
                  formik.errors.artist && 
                  typeof formik.errors.artist === 'string' ? (
@@ -117,7 +113,7 @@ const AddSong:React.FC<AddSongProps> = ({setSong}) => {
                     value={formik.values.album}
                     onChange={formik.handleChange}
                 />
-                {/* Handle error related to Song title */}
+                {/* Handle error related to Album */}
                 {formik.touched.album && 
                  formik.errors.album && 
                  typeof formik.errors.album === 'string' ? (
@@ -134,7 +130,7 @@ const AddSong:React.FC<AddSongProps> = ({setSong}) => {
                     value={formik.values.genre}
                     onChange={formik.handleChange}
                 />
-                {/* Handle error related to Song title */}
+                {/* Handle error related to Genre */}
                 {formik.touched.genre && 
                  formik.errors.genre && 
                  typeof formik.errors.genre === 'string' ? (
@@ -145,7 +141,7 @@ const AddSong:React.FC<AddSongProps> = ({setSong}) => {
 
                 {/* Save Button */}
                 <ButtonStyled color="orange">
-                    Save
+                    {addingSong? 'Loading...' : 'Save'}
                 </ButtonStyled>
             </FormStyled>
         {/* </Container> */}

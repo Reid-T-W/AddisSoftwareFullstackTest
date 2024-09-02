@@ -10,7 +10,7 @@ import {
 }from '../features/stats/stats.slice'
 
 // worker saga: will be fired on GET_STATS_REQUESTED actions
-function* fetchStatsWorker(): SagaIterator  {
+export function* fetchStatsWorker(): SagaIterator  {
     try {
       yield put (fetchStatsRequested());
       const stats: IStats = yield call(getStatsApiCall)
