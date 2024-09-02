@@ -37,8 +37,23 @@ const createSong = catchAsync(async (req, res, next) => {
 
 // eslint-disable-next-line no-unused-vars
 const getSongs = catchAsync(async (req, res, next) => {
-  const songs = await Song.find({}).sort({ createdAt: -1 });
-  res.json(songs);
+  const { search } = req.query;
+  if (search) {
+    const query = {
+      $or: [
+        { title: new RegExp(search, 'i') },
+        { artist: new RegExp(search, 'i') },
+        { album: new RegExp(search, 'i') },
+        { genre: new RegExp(search, 'i')}
+      ]
+    };
+    const songs = await Song.find(query).sort({ createdAt: -1 });
+    res.json(songs);
+  } else {
+    const songs = await Song.find({}).sort({ createdAt: -1 });
+    res.json(songs);
+  }
+
 });
 
 // eslint-disable-next-line no-unused-vars
