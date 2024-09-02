@@ -41,4 +41,11 @@ const getSongs = catchAsync(async (req, res, next) => {
   res.json(songs);
 });
 
-module.exports = { createSong, getSongs };
+// eslint-disable-next-line no-unused-vars
+const getSongDetails = catchAsync(async (req, res, next) => {
+  const { id } = req.params
+  const song = await Song.findById(id);
+  res.json(song)
+});
+
+module.exports = { createSong, getSongs, getSongDetails };
