@@ -10,19 +10,20 @@ interface SongsState {
     // Loaders
     loadingSongs: boolean;
     addingSong: boolean;
-    updatingSong: boolean;
     deletingSong: boolean;
+    updatingSongDetails: boolean;
     loadingSongDetails: boolean;
+    
     // Success Indicators
     songFetched: boolean;
     songAdded: boolean;
     songDeleted: boolean;
     songDetailUpdated: boolean;
     songDetailsFetched: boolean;
-    // Error Indicators
+
+    // Errors
     fetchSongsError: string;
     addSongError: string;
-    updateSongError: string;
     deleteSongError: string;
     getSongDetailsError: string;
     updateSongDetailsError: string;
@@ -36,8 +37,8 @@ const initialState: SongsState = {
     // Loading inidicators
     loadingSongs: false,
     addingSong: false,
-    updatingSong: false,
     deletingSong: false,
+    updatingSongDetails: false,
     loadingSongDetails: false,
 
     // Success indicators
@@ -50,7 +51,6 @@ const initialState: SongsState = {
     // Error indicators
     fetchSongsError: "",
     addSongError: "",
-    updateSongError: "",
     deleteSongError: "",
     getSongDetailsError: "",
     updateSongDetailsError: "",
@@ -60,7 +60,7 @@ const songsSlice = createSlice({
     name: "songs",
     initialState,
     reducers: {
-        // Functions related to songs state
+        // Reducers related getting songs
         fetchSongsRequested: (state: any) => {
             state.loadingSongs = true;
             console.log("Fetching songs ...");
@@ -77,6 +77,8 @@ const songsSlice = createSlice({
             state.fetchSongsError = action.payload;
             toast.error(`Failed to fetch songs ${action.payload}`)
         },
+
+        // Reducers related to adding a song
         addSongRequested: (state: any) => {
             state.addingSong = true;
             console.log("Adding Song ...")
@@ -93,10 +95,11 @@ const songsSlice = createSlice({
             state.addSongError = action.payload;
             toast.error(`Failed to add song ${action.payload}`)
         },
+
+        // Reducers related to getting song details
         fetchSongDetailsRequested: (state: any) => {
             state.loadingSongDetails = true;
             console.log("Fetching song details ...");
-
         },
         fetchSongDetailsSucceeded: (state: any, action: PayloadAction<ISong>) => {
             state.loadingSongDetails = false;
@@ -110,6 +113,44 @@ const songsSlice = createSlice({
             state.getSongDetailsError = action.payload;
             toast.error(`Failed to fetch song details ${action.payload}`)
         },
+
+        // Reducers related to updating a song
+        updateSongRequested: (state: any) => {
+            state.updatingSongDetails = true;
+            console.log("Updating Song ...")
+        },
+        updateSongSucceeded: (state, action) => {
+            state.updatingSongDetails = false;
+            state.songDetailUpdated = true;
+            console.log("Song updated successfully")
+            toast.success("Song updated successfully")
+        },
+        updateSongFailed: (state, action) => {
+            state.updatingSongDetails = false;
+            state.songDetailUpdated = false;
+            state.updateSongDetailsError = action.payload;
+            toast.error(`Failed to update song ${action.payload}`)
+        },
+
+        // Reducers related to deleting a song
+        deleteSongRequested: (state: any) => {
+            state.deletingSong = true;
+            console.log("Deleting Song ...")
+        },
+        deleteSongSucceeded: (state, action) => {
+            state.deletingSong = false;
+            state.songDeleted = true;
+            console.log("Song deleted successfully")
+            toast.success("Song deleted successfully")
+        },
+        deleteSongFailed: (state, action) => {
+            state.updatingSongDetails = false;
+            state.songDeleted = false;
+            state.deleteSongError = action.payload;
+            toast.error(`Failed to delete song ${action.payload}`)
+        },
+
+        // Reducers for setting the song state to null
         setSongToEmpty: (state: any) => {
             state.song = null;
         }
@@ -125,6 +166,12 @@ export const {
     fetchSongDetailsRequested,
     fetchSongDetailsSucceeded,
     fetchSongDetailsFailed,
+    updateSongRequested,
+    updateSongSucceeded,
+    updateSongFailed,
+    deleteSongRequested,
+    deleteSongSucceeded,
+    deleteSongFailed,
     setSongToEmpty
 } = songsSlice.actions;
 

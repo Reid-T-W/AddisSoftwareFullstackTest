@@ -36,7 +36,9 @@ const SongForm:React.FC<SongFormProps> = ({type}) => {
     const dispatch = useAppDispatch();
   
     // FOR EDIT SONG FORM
-    const song = useAppSelector((state: RootState) => state.songs.song)
+    const song = useAppSelector((state: RootState) => state.songs.song);
+    const updatingSongDetails = useAppSelector((state: RootState) => state.songs.updatingSongDetails);
+    
     const { id } = useParams();
     // Dispatches an action to get song details
     useEffect(()=>{
@@ -86,8 +88,8 @@ const SongForm:React.FC<SongFormProps> = ({type}) => {
     onSubmit: async (values) => {
         if (type === 'addSongForm') {
             dispatch({type: 'ADD_SONG_REQUESTED', payload: values});
-        } else if (type === 'editSongForm') {
-            dispatch({type: 'EDIT_SONG_REQUESTED', payload: values});
+        } else if (type === 'editSongForm' && id) {
+            dispatch({type: 'UPDATE_SONG_REQUESTED', payload: {id, values}});
         }
     },
     });
@@ -164,8 +166,13 @@ const SongForm:React.FC<SongFormProps> = ({type}) => {
             ) : null}
 
             {/* Save Button */}
-            <ButtonStyled color="orange">
-                {addingSong? 'Loading...' : 'Save'}
+            <ButtonStyled type="submit" color="orange">
+                {type === 'addSongForm'? (
+                        addingSong? 'Loading...' : 'Save'
+                    ) : (
+                        updatingSongDetails? 'Loading...' : 'Save'
+                    )
+                }
             </ButtonStyled>
         </FormStyled>
     </>
