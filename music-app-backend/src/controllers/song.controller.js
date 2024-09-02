@@ -37,7 +37,7 @@ const createSong = catchAsync(async (req, res, next) => {
 
 // eslint-disable-next-line no-unused-vars
 const getSongs = catchAsync(async (req, res, next) => {
-  const songs = await Song.find({});
+  const songs = await Song.find({}).sort({ createdAt: -1 });
   res.json(songs);
 });
 
