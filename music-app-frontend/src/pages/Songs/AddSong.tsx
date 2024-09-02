@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import emotionStyled from '@emotion/styled';
 import { ISong } from '../../types/song';
 import { useFormik } from 'formik';
@@ -54,18 +54,21 @@ const AddSong:React.FC<AddSongProps> = ({setSong}) => {
         genre: Yup.string().max(50).required('Genre is required'),    
     })
 
-
     const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
         dispatch({type: 'ADD_SONG_REQUESTED', payload: values})
-        if (songAdded && addingSong === false) {
-            // Reset form
-            resetForm();
-        }
         },
     });
+
+    // Reset form after song is successfully added
+    useEffect(() => {
+        if (songAdded && addingSong === false) {
+            // Reset form
+            formik.resetForm();
+        }
+    }, [songAdded, addingSong])
 
   return (
     <>
