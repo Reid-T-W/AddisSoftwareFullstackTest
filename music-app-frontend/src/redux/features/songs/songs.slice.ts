@@ -150,9 +150,14 @@ const songsSlice = createSlice({
             toast.error(`Failed to delete song ${action.payload}`)
         },
 
-        // Reducers for setting the song state to null
+        // Reducer for setting the song state to null
         setSongToEmpty: (state: any) => {
             state.song = null;
+        },
+
+        // Reducers for setting song deleted to false
+        setSongDeletedToFalse: (state: any) => {
+            state.songDeleted = false;
         }
     }
 })
@@ -172,7 +177,8 @@ export const {
     deleteSongRequested,
     deleteSongSucceeded,
     deleteSongFailed,
-    setSongToEmpty
+    setSongToEmpty,
+    setSongDeletedToFalse
 } = songsSlice.actions;
 
 export default songsSlice.reducer;

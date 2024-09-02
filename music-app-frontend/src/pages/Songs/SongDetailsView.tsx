@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import SongForm from './SongForm'
 import { ButtonStyled } from '../../components/ui/Button';
 import { MdDelete } from "react-icons/md";
 import emotionStyled from '@emotion/styled';
 import { MdEdit } from "react-icons/md";
+import { useNavigate, useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { SongActions } from '../../utils/constants/actions';
+import { RootState } from '../../redux/store';
+import { ImSpinner6 } from "react-icons/im";
+import { setSongDeletedToFalse } from '../../redux/features/songs/songs.slice';
 
 const Container = emotionStyled.div`
   display: flex;
@@ -46,18 +52,37 @@ const IconButton = emotionStyled.button`
 
 
 const SongDetailsView = () => {
-  return (
+
+    const { id } = useParams();
+    const dispatch = useAppDispatch();
+    const deletingSong = useAppSelector((state: RootState) => state.songs.deletingSong);
+    const songDeleted = useAppSelector((state: RootState) => state.songs.songDeleted);
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        if (id) {
+            dispatch({type: SongActions.DELETE_SONG_REQUESTED, payload: id});
+        }
+    }
+
+    // Navigate to home page when song deletion is successful
+    useEffect(()=>{
+        if (songDeleted){
+            navigate('/');
+            // Reseting to the original state
+            dispatch(setSongDeletedToFalse());
+        }
+    },[songDeleted])
+
+    return (
     <>
         <Container>
             {/* <ButtonStyled color="orange">Delete</ButtonStyled> */}
             <RowContainer justifyContent="space-between">
                 <h3>Title</h3>
                 <RowContainer justifyContent="space-around">
-                    <IconButton>
-                        <MdEdit />
-                    </IconButton>
-                    <IconButton>
-                        <MdDelete />
+                    <IconButton onClick={handleClick}>
+                        {deletingSong? <ImSpinner6 /> : <MdDelete />}
                     </IconButton>
                 </RowContainer>
             </RowContainer>
@@ -65,7 +90,7 @@ const SongDetailsView = () => {
         </Container>
 
     </>
-  )
+    )
 }
 
 export default SongDetailsView
