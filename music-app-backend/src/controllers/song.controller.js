@@ -21,8 +21,8 @@ const catchAsync = require('../utils/catchAsync.js');
 
 // eslint-disable-next-line no-unused-vars
 const createSong = catchAsync(async (req, res, next) => {
-  await Song.create(req.body);
-  res.status(201).send({ success: true, message: 'Song created successfully' });
+  const newSong = await Song.create(req.body);
+  res.status(201).send({ success: true, message: 'Song created successfully', data: newSong });
 });
 /**
  * Get list of songs.
@@ -48,4 +48,27 @@ const getSongDetails = catchAsync(async (req, res, next) => {
   res.json(song)
 });
 
-module.exports = { createSong, getSongs, getSongDetails };
+// eslint-disable-next-line no-unused-vars
+const updateSong = catchAsync(async (req, res, next) => {
+  const { id } = req.params
+
+  const updatedSong = await Song.findByIdAndUpdate(id, req.body, { new: true });
+  res.status(201).send({ success: true, message: 'Song updated successfully', data: updatedSong });
+});
+
+// eslint-disable-next-line no-unused-vars
+const deleteSong = catchAsync(async (req, res, next) => {
+
+  const { id } = req.params
+
+  const deletedSong = await Song.findByIdAndDelete(id);
+  res.status(200).send({ success: true, message: 'Song deleted successfully', data: deletedSong });
+});
+
+module.exports = { 
+  createSong, 
+  getSongs, 
+  getSongDetails,
+  updateSong,
+  deleteSong
+};

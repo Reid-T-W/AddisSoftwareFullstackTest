@@ -3,8 +3,8 @@ const logger = require('./../config/logger');
 const Song = require('../models/song.model');
 
 // Middleware function to validate the request agains a schema
-const validate = (schema) => (req, res, next) => {
-  // Reduce the request object to only the relevant keys
+const validateBodySchema = (schema) => (req, res, next) => {
+
   const data = req.body;
 
   // Validate the object against the schema
@@ -24,6 +24,10 @@ const validate = (schema) => (req, res, next) => {
   return next();
 };
 
+
+// Middleware function to check for duplicate records
+// This will be called before adding and updating a 
+// record
 const duplicateCheck = async (req, res, next) => {
   // Reduce the request object to only the relevant keys
   const {title, album, artist} = req.body;
@@ -43,7 +47,29 @@ const duplicateCheck = async (req, res, next) => {
   }
 }
 
+// Middleware function to validate params against a schema
+const validateIdParamSchema = (schema) => (req, res, next) => {
+  const { id } = req.params
+
+  // Validate the id param against the schema
+  // eslint-disable-next-line no-unused-vars
+  const { value, error } = schema.validate(id, { abortEarly: false });
+
+  // If there is an error, respond with a 400 status and the error
+  // details
+  if (error) {
+    logger.error('error: ', error);
+    const errors = error.details.map((detail) => detail.message).join(',');
+    next(new ApiError(400, errors));
+  }
+
+  // If no error, call next to proceed
+  return next();
+};
+
+
 module.exports = {
-  validate,
-  duplicateCheck
+  validateBodySchema,
+  duplicateCheck,
+  validateIdParamSchema
 }

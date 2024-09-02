@@ -10,4 +10,16 @@ const createSongSchema = joi
   })
   .unknown();
 
-module.exports = createSongSchema;
+const updateSongSchema = joi
+  .object({
+    title: joi.string().required(),
+    artist: joi.string().required(),
+    album: joi.string().required(),
+    genre: joi.string().required(),
+  })
+  .unknown();
+
+module.exports = {
+  createSongSchema,
+  updateSongSchema
+}
