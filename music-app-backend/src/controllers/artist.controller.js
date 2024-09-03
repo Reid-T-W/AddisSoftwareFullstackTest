@@ -5,13 +5,29 @@ const catchAsync = require("../utils/catchAsync");
 const getArtists = catchAsync(async (req, res, next) => {
     const { search } = req.query;
     if (search) {
-      const query = {
-        $or: [
-        //   { artist: new RegExp(search, 'i') },
-        ]
-      };
-      const songs = await Song.find(query).sort({ createdAt: -1 });
-      res.json(songs);
+        const artists = await Song.aggregate([
+            {
+                $match: {
+                    artist: new RegExp(search, 'i'),
+                },
+            },
+            {
+                $group: {
+                  _id: '$artist',
+                  noOfSongs: { $sum: 1 },
+                  uniqueAlbums: { $addToSet: '$album' },
+                },
+              },
+              {
+                $project: {
+                  artist: '$_id',
+                  noOfSongs: 1,
+                  noOfAlbums: { $size: '$uniqueAlbums' },
+                  _id: 0,
+                },
+              },
+          ]);
+      res.json(artists);
     } else {
         const artists = await Song.aggregate([
             {
