@@ -32,7 +32,7 @@ const GenresView = () => {
     return (
         <Container>
           <RowContainer>
-            <Search placeholder={"Search Genres"}/>
+            <Search type="genres" placeholder={"Search genres by name"}/>
           </RowContainer>
           <ScrollableBox>
             <GenresList />

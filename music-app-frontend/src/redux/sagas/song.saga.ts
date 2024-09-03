@@ -104,7 +104,7 @@ function* deleteSongWorker(action: any): SagaIterator {
   }
 }
 
-// worker saga: will be fired on GET_SONGS_REQUESTED actions
+// worker saga: will be fired on SEARCH_SONG_REQUESTED actions
 function* searchSongWorker(action: any): SagaIterator  {
   try {
     yield put (fetchSongsRequested());

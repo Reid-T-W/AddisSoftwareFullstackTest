@@ -31,7 +31,7 @@ const AlbumsView = () => {
     return (
         <Container>
           <RowContainer>
-            <Search placeholder={"Search Albums"}/>
+            <Search type="albums" placeholder={"Search albums by name or artist name"}/>
           </RowContainer>
           <ScrollableBox>
             <AlbumsList />

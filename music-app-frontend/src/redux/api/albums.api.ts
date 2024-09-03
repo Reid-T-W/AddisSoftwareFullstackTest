@@ -10,3 +10,12 @@ export const getAlbumsApiCall = (): Promise<IAlbum[]> => {
       throw(error)
     })
 }
+
+export const searchAlbumsApiCall = (searchTerm: string): Promise<IAlbum[]> => {
+  return axiosInstance.get<IAlbum[]>(`${Endpoints.albums}?search=${searchTerm}`)
+  .then((response)=>{
+      return response.data
+  }).catch((error) => {
+    throw(error)
+  })
+}

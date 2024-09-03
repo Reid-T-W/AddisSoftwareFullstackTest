@@ -47,7 +47,7 @@ const SongsView = () => {
   return (
     <Container>
       <RowContainer>
-        <Search placeholder={"Search songs by title, artist, album, or genre"}/>
+        <Search type="songs" placeholder={"Search songs by title, artist, album, or genre"}/>
         <ButtonStyled 
           onClick={handleClick}
           color={'#636363'}

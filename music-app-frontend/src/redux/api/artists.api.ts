@@ -10,3 +10,12 @@ export const getArtistsApiCall = (): Promise<IArtist[]> => {
       throw(error)
     })
 }
+
+export const searchArtistsApiCall = (searchTerm: string): Promise<IArtist[]> => {
+  return axiosInstance.get<IArtist[]>(`${Endpoints.artists}?search=${searchTerm}`)
+  .then((response)=>{
+      return response.data
+  }).catch((error) => {
+    throw(error)
+  })
+}

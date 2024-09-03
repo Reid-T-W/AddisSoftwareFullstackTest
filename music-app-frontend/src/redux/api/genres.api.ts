@@ -10,3 +10,12 @@ export const getGenresApiCall = (): Promise<IGenre[]> => {
       throw(error)
     })
 }
+
+export const searchGenresApiCall = (searchTerm: string): Promise<IGenre[]> => {
+  return axiosInstance.get<IGenre[]>(`${Endpoints.genres}?search=${searchTerm}`)
+  .then((response)=>{
+      return response.data
+  }).catch((error) => {
+    throw(error)
+  })
+}
