@@ -2,7 +2,7 @@ const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const { version } = require('../../../package.json');
 const logger = require('../../config/logger');
-const { serverHost, port } = require('../../config/config');
+const { serverHost } = require('../../config/config');
 
 const options = {
     definition: {
@@ -13,7 +13,8 @@ const options = {
         },
         servers: [
             {
-                url: `${serverHost}:${port}/api/v1`,
+                url: `${serverHost}/api/v1`,
+                // url: `${serverHost}:${port}/api/v1`,
             }
         ]
     },
@@ -34,7 +35,8 @@ function SwaggerDocs(app){
         res.send(swaggerSpec);
     });
 
-    logger.info(`Docs available at ${serverHost}:${port}/docs`);
+    logger.info(`Docs available at ${serverHost}/docs`);
+    // logger.info(`Docs available at ${serverHost}:${port}/docs`);
 }
 
 module.exports = SwaggerDocs;
