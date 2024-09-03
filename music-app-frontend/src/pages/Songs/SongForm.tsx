@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import emotionStyled from '@emotion/styled';
-import { ISong } from '../../types/song';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { ButtonStyled } from '../../components/ui/Button';

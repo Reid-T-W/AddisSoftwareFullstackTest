@@ -83,7 +83,7 @@ const songsSlice = createSlice({
             state.addingSong = true;
             console.log("Adding Song ...")
         },
-        addSongSucceeded: (state, action) => {
+        addSongSucceeded: (state) => {
             state.addingSong = false;
             state.songAdded = true;
             console.log("Song added successfully")
@@ -119,7 +119,7 @@ const songsSlice = createSlice({
             state.updatingSongDetails = true;
             console.log("Updating Song ...")
         },
-        updateSongSucceeded: (state, action) => {
+        updateSongSucceeded: (state) => {
             state.updatingSongDetails = false;
             state.songDetailUpdated = true;
             console.log("Song updated successfully")
@@ -137,7 +137,7 @@ const songsSlice = createSlice({
             state.deletingSong = true;
             console.log("Deleting Song ...")
         },
-        deleteSongSucceeded: (state, action) => {
+        deleteSongSucceeded: (state) => {
             state.deletingSong = false;
             state.songDeleted = true;
             console.log("Song deleted successfully")

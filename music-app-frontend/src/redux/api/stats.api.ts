@@ -1,4 +1,3 @@
-import { GiConsoleController } from "react-icons/gi"
 import { IStats } from "../../types"
 import { Endpoints } from "../../utils/constants/endpoints"
 import { axiosInstance } from "./base.api"

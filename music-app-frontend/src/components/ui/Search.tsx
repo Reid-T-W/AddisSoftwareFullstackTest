@@ -6,7 +6,6 @@ import { ButtonStyled } from './Button';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { AlbumActions, ArtistActions, GenreActions, SongActions } from '../../utils/constants/actions';
 import { RootState } from '../../redux/store';
-import { ImSpinner } from "react-icons/im";
 
 const SearchBoxWrapper = emotionStyled.div`
   display: flex;
@@ -77,7 +76,7 @@ const Search:React.FC<SearchProps> = ({ type, placeholder }) => {
         placeholder={`${placeholder}...`}
         onChange={(e) => handleSearchInput(e.target.value)}
       />
-      
+
       {/* Search Button */}
       {type==='songs' && (
         <ButtonStyled color={'#636363'} onClick={handleSearchClick}>

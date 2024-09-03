@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import Card from '../../components/ui/Card/Card'
 import emotionStyled from '@emotion/styled';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';

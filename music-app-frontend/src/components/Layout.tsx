@@ -1,13 +1,10 @@
 import React, {ReactNode} from 'react';
 import styled from '@emotion/styled';
-import { color, space } from 'styled-system';
 import { LuSeparatorHorizontal } from "react-icons/lu";
 import HorizontalMenu from './ui/HorizontalMenu';
 import Stats from './ui/Stats';
 
 const Container = styled.div`
-  ${color}
-  ${space}
   display: flex;
   flex-direction: column;
   max-height: 100vh;

@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Search from '../../components/ui/Search';
 import emotionStyled from '@emotion/styled';
 import { ButtonStyled } from '../../components/ui/Button';
 import SongForm from './SongForm';
 import SongsList from './SongsList';
-import { ISong } from '../../types';
-import { useAppSelector } from '../../redux/hooks';
-import { RootState } from '../../redux/store';
 
 const Container = emotionStyled.div`
   display: flex;
@@ -36,9 +33,7 @@ const RowContainer = emotionStyled.div`
  
 const SongsView = () => {
   
-  const [addSong, setAddSong] = useState(false)
-  const [song, setSong] = useState<ISong>()
-
+  const [addSong, setAddSong] = useState(false);
 
   const handleClick = () => {
     setAddSong(!addSong);

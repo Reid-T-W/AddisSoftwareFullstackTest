@@ -44,8 +44,8 @@ function* fetchSongsWorker(): SagaIterator  {
 function* addSongWorker(action: any): SagaIterator {
   try {
     yield put(addSongRequested());
-    const response: ISong = yield call(addSongApiCall, action.payload)
-    yield put(addSongSucceeded(response))
+    yield call(addSongApiCall, action.payload)
+    yield put(addSongSucceeded())
     
     // Once the song is successfully added make a call to the songs and 
     // stats api, so that songs and stats are updated instantly
@@ -74,8 +74,8 @@ function* updateSongWorker(action: any): SagaIterator {
   try {
     console.log("in update sonw worker")
     yield put(updateSongRequested());
-    const response: ISong = yield call(updateSongApiCall, action.payload)
-    yield put(updateSongSucceeded(response))
+    yield call(updateSongApiCall, action.payload)
+    yield put(updateSongSucceeded())
     
     // Once the song is successfully updated make a call to the songs api,
     // so that songs so that songs are updated
@@ -90,8 +90,8 @@ function* updateSongWorker(action: any): SagaIterator {
 function* deleteSongWorker(action: any): SagaIterator {
   try {
     yield put(deleteSongRequested());
-    const response: ISong = yield call(deleteSongApiCall, action.payload)
-    yield put(deleteSongSucceeded(response))
+    yield call(deleteSongApiCall, action.payload)
+    yield put(deleteSongSucceeded())
     
     // Once the song is successfully deleted make a call to the songs and 
     // stats api, so that songs and stats are updated instantly
