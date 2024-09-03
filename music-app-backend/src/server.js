@@ -10,7 +10,11 @@ const cors = require('cors');
 const app = express();
 
 const corsOptions = {
-  origin: ['http://localhost:5173', 'http://localhost:4173'],
+  origin: [
+    'http://localhost:5173', 
+    'http://localhost:4173', 
+    'https://addis-software-fullstack-test-7h8ziigga-reidtws-projects.vercel.app'
+  ],
 };
 app.use(cors(corsOptions));
 app.use(express.json());
