@@ -1,7 +1,7 @@
 import emotionStyled from '@emotion/styled';
 import { FaArrowTrendUp } from "react-icons/fa6";
 import React from 'react'
-import { ISong } from '../../../types';
+import { IAlbum, IArtist, IGenre, ISong } from '../../../types';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../redux/hooks';
 import { setSongToEmpty } from '../../../redux/features/songs/songs.slice';
@@ -45,16 +45,26 @@ const IndividualHeadings = emotionStyled.p`
 export interface CardProps {
   type: string;
   song?: ISong;
+  artist?: IArtist;
+  album?: IAlbum;
+  genre?: IGenre;
   content?: string;
 }
 
 
-const Card:React.FC<CardProps> = ({type, song, content}) => {
+const Card:React.FC<CardProps> = ({
+  type,
+  song,
+  artist,
+  album,
+  genre,
+  content,
+}) => {
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const handleClick = (id: string) => {
+  const handleSongCardClick = (id: string) => {
     // Set song state to empty, this will
     // avoid displaying previous state
     // values when navigating to the song details page.
@@ -66,12 +76,47 @@ const Card:React.FC<CardProps> = ({type, song, content}) => {
   
   const songCard = (song: ISong) => {
     return (
-      <CardContent onClick={() => handleClick(song._id)}>
+      <CardContent onClick={() => handleSongCardClick(song._id)}>
         <h3>{song.title}</h3>
         <AdditionalContainer>
             <IndividualHeadings>{song.artist}</IndividualHeadings>
             <IndividualHeadings>{song.album}</IndividualHeadings>
             <IndividualHeadings>{song.genre}</IndividualHeadings>
+        </AdditionalContainer>
+      </CardContent>
+    )
+  }
+
+  const albumCard = (album: IAlbum) => {
+    return (
+      <CardContent>
+        <h3>{album.album}</h3>
+        <AdditionalContainer>
+            <IndividualHeadings>{album.artist}</IndividualHeadings>
+            <IndividualHeadings>{album.noOfSongs}</IndividualHeadings>
+        </AdditionalContainer>
+      </CardContent>
+    )
+  }
+
+  const artistCard = (artist: IArtist) => {
+    return (
+      <CardContent>
+        <h3>{artist.artist}</h3>
+        <AdditionalContainer>
+            <IndividualHeadings>{artist.noOfAlbums}</IndividualHeadings>
+            <IndividualHeadings>{artist.noOfSongs}</IndividualHeadings>
+        </AdditionalContainer>
+      </CardContent>
+    )
+  }
+
+  const genreCard = (genre: IGenre) => {
+    return (
+      <CardContent>
+        <h3>{genre.genre}</h3>
+        <AdditionalContainer>
+            <IndividualHeadings>{genre.noOfSongs}</IndividualHeadings>
         </AdditionalContainer>
       </CardContent>
     )
@@ -92,6 +137,9 @@ const Card:React.FC<CardProps> = ({type, song, content}) => {
       then display songCard. If type of card is stats, then
        display statsCard. */}
       {type === "songs" && song && songCard(song)}
+      {type === "albums" && album && albumCard(album)}
+      {type === "artists" && artist && artistCard(artist)}
+      {type === "genres" && genre && genreCard(genre)}
       {type === "stats" && statsCard(content?content:'')}
     </>
   )

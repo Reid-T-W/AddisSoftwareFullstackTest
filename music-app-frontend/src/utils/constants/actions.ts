@@ -10,3 +10,15 @@ export enum SongActions {
 export enum StatsActions {
     GET_STATS_REQUESTED = 'GET_STATS_REQUESTED',
 }
+
+export enum AlbumActions {
+    GET_ALBUMS_REQUESTED = 'GET_ALBUMS_REQUESTED',
+}
+
+export enum ArtistActions {
+    GET_ARTISTS_REQUESTED = 'GET_ARTIGET_ARTISTS_REQUESTEDSTS_REQUESTED',
+}
+
+export enum GenreActions {
+    GET_GENRES_REQUESTED = 'GET_GENRES_REQUESTED',
+}
