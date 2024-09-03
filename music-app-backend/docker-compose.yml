@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  music-app:
+    container_name: music-app-api
+    build:
+      dockerfile: Dockerfile
+      context: .
+    environment:
+      - PORT=${PORT}
+      - MONGO_URI=${DB_CONNECTION}
+    command: npm start
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - mongo-db
+    volumes:
+      - .:/opt/app
+    networks:
+      - music-app-network
+
+  mongo-db:
+    image: mongo:6-jammy
+    ports:
+      - '27017:27017'
+    volumes:
+      - dbdata6:/data/db
+    networks:
+      - music-app-network
+
+volumes:
+  dbdata6:
+
+networks:
+  node-network:
+    driver: bridge
