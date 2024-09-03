@@ -87,9 +87,9 @@ const SongForm:React.FC<SongFormProps> = ({type}) => {
     validationSchema,
     onSubmit: async (values) => {
         if (type === 'addSongForm') {
-            dispatch({type: 'ADD_SONG_REQUESTED', payload: values});
+            dispatch({type: SongActions.ADD_SONG_REQUESTED, payload: values});
         } else if (type === 'editSongForm' && id) {
-            dispatch({type: 'UPDATE_SONG_REQUESTED', payload: {id, values}});
+            dispatch({type: SongActions.UPDATE_SONG_REQUESTED, payload: {id, values}});
         }
     },
     });

@@ -33,17 +33,24 @@ const Search:React.FC<SearchProps> = ({ placeholder }) => {
   const [searchValue, setSearchValue] = useState("");
   const dispatch = useAppDispatch();
 
-  const handleClick = () => {
+  const handleSearchClick = () => {
     dispatch({type: SongActions.SEARCH_SONG_REQUESTED, payload: searchValue});
   }
+
+  const handleSearchInput = (searchTerm: string) => {
+    setSearchValue(searchTerm)
+    dispatch({type: SongActions.SEARCH_SONG_REQUESTED, payload: searchTerm});
+  }
+
+
 
   return (
     <SearchBoxWrapper>
       <Input
         placeholder={`${placeholder}...`}
-        onChange={(e) => setSearchValue(e.target.value)}
+        onChange={(e) => handleSearchInput(e.target.value)}
       />
-      <ButtonStyled color={'#636363'} onClick={handleClick}>
+      <ButtonStyled color={'#636363'} onClick={handleSearchClick}>
         Search
       </ButtonStyled>
     </SearchBoxWrapper>
