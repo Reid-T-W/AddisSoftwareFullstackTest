@@ -7,7 +7,8 @@ import {
   getSongDetailsApiCall,
   getSongsApiCall,
   updateSongApiCall,
-  deleteSongApiCall
+  deleteSongApiCall,
+  searchSongsApiCall
 } from '../api/songs.api';
 import {
     fetchSongsRequested,
@@ -103,6 +104,17 @@ function* deleteSongWorker(action: any): SagaIterator {
   }
 }
 
+// worker saga: will be fired on GET_SONGS_REQUESTED actions
+function* searchSongWorker(action: any): SagaIterator  {
+  try {
+    yield put (fetchSongsRequested());
+    const songs: ISong[] = yield call(searchSongsApiCall, action.payload)
+    yield put(fetchSongsSucceeded(songs))
+  } catch (e: any) {
+    yield put(fetchSongsFailed(e.message))
+  }
+}
+
 
 export function* songSagas() {
     // Handles actions related to songs
@@ -110,6 +122,6 @@ export function* songSagas() {
     yield takeLatest(SongActions.UPDATE_SONG_REQUESTED, updateSongWorker)
     yield takeLatest(SongActions.DELETE_SONG_REQUESTED, deleteSongWorker)
     yield takeLatest(SongActions.ADD_SONG_REQUESTED, addSongWorker)
-    // yield takeLatest(SongActions.SERCH_SONG_REQUESTED, searchSongWorker)
+    yield takeLatest(SongActions.SEARCH_SONG_REQUESTED, searchSongWorker)
     yield takeLatest(SongActions.GET_SONG_DETAILS_REQUESTED, fetchSongDetailsWorker)
 }

@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 // import styled from '@emotion/styled';
 import emotionStyled from '@emotion/styled';
 import { ButtonStyled } from './Button';
+import { useAppDispatch } from '../../redux/hooks';
+import { SongActions } from '../../utils/constants/actions';
 
 const SearchBoxWrapper = emotionStyled.div`
   display: flex;
@@ -28,12 +30,20 @@ export interface SearchProps {
 }
 
 const Search:React.FC<SearchProps> = ({ placeholder }) => {
+  const [searchValue, setSearchValue] = useState("");
+  const dispatch = useAppDispatch();
+
+  const handleClick = () => {
+    dispatch({type: SongActions.SEARCH_SONG_REQUESTED, payload: searchValue});
+  }
+
   return (
     <SearchBoxWrapper>
       <Input
         placeholder={`${placeholder}...`}
+        onChange={(e) => setSearchValue(e.target.value)}
       />
-      <ButtonStyled color={'#636363'}>
+      <ButtonStyled color={'#636363'} onClick={handleClick}>
         Search
       </ButtonStyled>
     </SearchBoxWrapper>

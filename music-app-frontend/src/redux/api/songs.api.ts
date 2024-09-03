@@ -52,3 +52,13 @@ export const deleteSongApiCall = (songId: string): Promise<ISong> => {
   })
 }
 
+export const searchSongsApiCall = (searchTerm: string): Promise<ISong[]> => {
+  return axiosInstance.get<ISong[]>(`${Endpoints.songs}?search=${searchTerm}`)
+  .then((response)=>{
+      return response.data
+  }).catch((error) => {
+    throw(error)
+  })
+}
+
+
