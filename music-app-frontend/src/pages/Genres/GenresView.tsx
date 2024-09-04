@@ -1,6 +1,9 @@
 import emotionStyled from '@emotion/styled';
 import Search from '../../components/ui/Search';
 import GenresList from './GenresList';
+import { useAppDispatch } from '../../redux/hooks';
+import { useEffect } from 'react';
+import { setSelectedTab } from '../../redux/features/settings/settings.slice';
 
 
 const Container = emotionStyled.div`
@@ -29,6 +32,13 @@ const RowContainer = emotionStyled.div`
   align-items: baseline;
 `
 const GenresView = () => {
+    // When genres view is loaded the selected tab
+    // should be genres.
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+      dispatch(setSelectedTab("genres"));
+    }, [])
     return (
         <Container>
           <RowContainer>

@@ -1,6 +1,9 @@
 import emotionStyled from '@emotion/styled';
 import Search from '../../components/ui/Search';
 import AlbumsList from '../Albums/AlbumsList';
+import { useEffect } from 'react';
+import { useAppDispatch } from '../../redux/hooks';
+import { setSelectedTab } from '../../redux/features/settings/settings.slice';
 
 const Container = emotionStyled.div`
   display: flex;
@@ -28,6 +31,15 @@ const RowContainer = emotionStyled.div`
   align-items: baseline;
 `
 const AlbumsView = () => {
+
+    // When albums view is loaded the selected tab
+    // should be albums.
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+      dispatch(setSelectedTab("albums"));
+    }, [])
+
     return (
         <Container>
           <RowContainer>

@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Search from '../../components/ui/Search';
 import emotionStyled from '@emotion/styled';
 import { ButtonStyled } from '../../components/ui/Button';
 import SongForm from './SongForm';
 import SongsList from './SongsList';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { RootState } from '../../redux/store';
+import { setSelectedTab } from '../../redux/features/settings/settings.slice';
 
 const Container = emotionStyled.div`
   display: flex;
@@ -34,11 +37,18 @@ const RowContainer = emotionStyled.div`
 const SongsView = () => {
   
   const [addSong, setAddSong] = useState(false);
+  const dispatch = useAppDispatch();
 
   const handleClick = () => {
     setAddSong(!addSong);
   };
 
+  // When songs view is loaded the selected tab
+  // should be songs. 
+  useEffect(() => {
+    dispatch(setSelectedTab("songs"));
+  }, [])
+  
   return (
     <Container>
       <RowContainer>
