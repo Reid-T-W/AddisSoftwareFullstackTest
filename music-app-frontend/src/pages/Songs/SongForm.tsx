@@ -22,11 +22,14 @@ const InputDisplayStyled = emotionStyled.input`
     border-bottom: 1px solid orange;
     margin: 2rem;
 `
+interface FormStyledProps {
+    type?: string;
+}
 
-const FormStyled = emotionStyled.form`
+const FormStyled = emotionStyled.form<FormStyledProps>`
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: ${props => props.type === FormTypes.addSongForm? '40%' : '70%'};
 `;
 
 interface SongFormProps {
@@ -91,7 +94,7 @@ const SongForm:React.FC<SongFormProps> = ({type, song}) => {
 
   return (
     <>
-        <FormStyled onSubmit={formik.handleSubmit}>
+        <FormStyled onSubmit={formik.handleSubmit} type={type}>
             {/* Song Title Input */}
             <InputDisplayStyled 
                 name='title' 
