@@ -6,7 +6,7 @@ import SongForm from './SongForm';
 import SongsList from './SongsList';
 import { useAppDispatch } from '../../redux/hooks';
 import { setSelectedTab } from '../../redux/features/settings/settings.slice';
-import { Types } from '../../utils/constants/types';
+import { FormTypes, Types } from '../../utils/constants/types';
 
 const Container = emotionStyled.div`
   display: flex;
@@ -60,7 +60,7 @@ const SongsView = () => {
           {addSong? 'Close' : 'Add Song'}
         </ButtonStyled>
       </RowContainer>
-      {addSong && <SongForm type={'addSongForm'} />}
+      {addSong && <SongForm type={FormTypes.addSongForm} />}
       <ScrollableBox>
         <SongsList />
       </ScrollableBox>

@@ -8,6 +8,7 @@ import { RootState } from '../../redux/store';
 import { SongActions } from '../../utils/constants/actions';
 import { useParams } from 'react-router-dom';
 import { ISong } from '../../types';
+import { FormTypes } from '../../utils/constants/types';
 
 const InputDisplayStyled = emotionStyled.input`
     background: none;
@@ -62,10 +63,10 @@ const SongForm:React.FC<SongFormProps> = ({type, song}) => {
     }
 
     const initialValues: FormValues = {
-        title: type === 'editSongForm'&& song ? song?.title : '',
-        artist: type === 'editSongForm'&& song ? song?.artist : '',
-        album: type === 'editSongForm'&& song ? song?.album : '',
-        genre: type === 'editSongForm'&& song ? song?.genre : '',
+        title: type === FormTypes.editSongForm && song ? song?.title : '',
+        artist: type === FormTypes.editSongForm && song ? song?.artist : '',
+        album: type === FormTypes.editSongForm && song ? song?.album : '',
+        genre: type === FormTypes.editSongForm && song ? song?.genre : '',
     };
 
     const validationSchema = Yup.object({
@@ -80,9 +81,9 @@ const SongForm:React.FC<SongFormProps> = ({type, song}) => {
     enableReinitialize: true,
     validationSchema,
     onSubmit: async (values) => {
-        if (type === 'addSongForm') {
+        if (type === FormTypes.addSongForm) {
             dispatch({type: SongActions.ADD_SONG_REQUESTED, payload: values});
-        } else if (type === 'editSongForm' && id) {
+        } else if (type === FormTypes.editSongForm && id) {
             dispatch({type: SongActions.UPDATE_SONG_REQUESTED, payload: {id, values}});
         }
     },
@@ -161,7 +162,7 @@ const SongForm:React.FC<SongFormProps> = ({type, song}) => {
 
             {/* Save Button */}
             <ButtonStyled type="submit" color="orange">
-                {type === 'addSongForm'? (
+                {type === FormTypes.addSongForm? (
                         addingSong? 'Loading...' : 'Save'
                     ) : (
                         updatingSongDetails? 'Loading...' : 'Save'

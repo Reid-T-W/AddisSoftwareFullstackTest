@@ -5,3 +5,8 @@ export enum Types {
     genres = 'genres',
     stats = 'stats',
 }
+
+export enum FormTypes {
+    addSongForm = 'addSongForm',
+    editSongForm = 'editSongForm',
+}

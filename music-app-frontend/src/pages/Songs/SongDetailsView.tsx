@@ -8,6 +8,7 @@ import { SongActions } from '../../utils/constants/actions';
 import { RootState } from '../../redux/store';
 import { ImSpinner6 } from "react-icons/im";
 import { setSongDeletedToFalse } from '../../redux/features/songs/songs.slice';
+import { FormTypes } from '../../utils/constants/types';
 
 const Container = emotionStyled.div`
   display: flex;
@@ -96,7 +97,7 @@ const SongDetailsView = () => {
                         </IconButton>
                         {/* </RowContainer> */}
                     </RowContainer>
-                    <SongForm type={'editSongForm'} song={song}/>
+                    <SongForm type={FormTypes.editSongForm} song={song}/>
                 </>
             ):
             (
