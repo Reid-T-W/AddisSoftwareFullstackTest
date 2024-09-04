@@ -89,7 +89,7 @@ function* updateSongWorker(action: any): SagaIterator {
 // worker saga: will be fired on DELETE_SONG_REQUESTED actions
 function* deleteSongWorker(action: any): SagaIterator {
   try {
-    yield put(deleteSongRequested());
+    yield put(deleteSongRequested(action.payload));
     yield call(deleteSongApiCall, action.payload)
     yield put(deleteSongSucceeded())
     

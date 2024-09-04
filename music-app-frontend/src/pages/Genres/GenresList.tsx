@@ -10,7 +10,7 @@ const Container = emotionStyled.div`
   flex-wrap: wrap;
   padding-top: 3rem;
   justify-content: center;
-  align-items: center;
+  align-items: top;
   text-align: center;
   width: 70vw;
 `;

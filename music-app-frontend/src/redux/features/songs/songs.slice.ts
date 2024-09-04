@@ -28,6 +28,9 @@ interface SongsState {
     getSongDetailsError: string;
     updateSongDetailsError: string;
 
+    // Selections
+    songToDelete: string;
+
 }
 
 // Defining an initial state
@@ -54,6 +57,9 @@ const initialState: SongsState = {
     deleteSongError: "",
     getSongDetailsError: "",
     updateSongDetailsError: "",
+
+    // Selections
+    songToDelete: "",
 }
 
 const songsSlice = createSlice({
@@ -133,8 +139,9 @@ const songsSlice = createSlice({
         },
 
         // Reducers related to deleting a song
-        deleteSongRequested: (state: any) => {
+        deleteSongRequested: (state: any, action) => {
             state.deletingSong = true;
+            state.songToDelete = action.payload;
             console.log("Deleting Song ...")
         },
         deleteSongSucceeded: (state) => {
