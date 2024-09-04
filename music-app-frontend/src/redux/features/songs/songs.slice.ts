@@ -87,7 +87,8 @@ const songsSlice = createSlice({
             state.loadingSongs = false;
             state.songFetched = false;
             state.fetchSongsError = action.payload;
-            toast.error(`Failed to fetch songs ${action.payload}`)
+            console.error(`Failed to fetch songs ${action.payload}`)
+            toast.error(`Failed to fetch songs`)
         },
 
         // Reducers related to adding a song
@@ -105,7 +106,12 @@ const songsSlice = createSlice({
             state.addingSong = false;
             state.songAdded = false;
             state.addSongError = action.payload;
-            toast.error(`Failed to add song ${action.payload}`)
+            console.error(`Failed to add song ${action.payload}`)
+            if (action.payload === "Song with same title, artist and album exists") {
+                toast.error(`Failed to add song ${action.payload}`);
+            } else {
+                toast.error(`Failed to add song`)
+            } 
         },
 
         // Reducers related to getting song details
@@ -123,7 +129,8 @@ const songsSlice = createSlice({
             state.loadingSongDetails = false;
             state.songDetailsFetched = false;
             state.getSongDetailsError = action.payload;
-            toast.error(`Failed to fetch song details ${action.payload}`)
+            console.error(`Failed to fetch song details ${action.payload}`)
+            toast.error(`Failed to fetch song details`)
         },
 
         // Reducers related to updating a song
@@ -141,26 +148,28 @@ const songsSlice = createSlice({
             state.updatingSongDetails = false;
             state.songDetailUpdated = false;
             state.updateSongDetailsError = action.payload;
-            toast.error(`Failed to update song ${action.payload}`)
+            console.error(`Failed to update song ${action.payload}`)
+            toast.error(`Failed to update song`)
         },
 
         // Reducers related to deleting a song
         deleteSongRequested: (state: any, action) => {
             state.deletingSong = true;
             state.songToDelete = action.payload;
-            console.log("Deleting Song ...")
+            console.log("Deleting Song ...");
         },
         deleteSongSucceeded: (state) => {
             state.deletingSong = false;
             state.songDeleted = true;
-            console.log("Song deleted successfully")
-            toast.success("Song deleted successfully")
+            console.log("Song deleted successfully");
+            toast.success("Song deleted successfully");
         },
         deleteSongFailed: (state, action) => {
             state.updatingSongDetails = false;
             state.songDeleted = false;
             state.deleteSongError = action.payload;
-            toast.error(`Failed to delete song ${action.payload}`)
+            console.error(`Failed to delete song ${action.payload}`);
+            toast.error(`Failed to delete song`);
         },
 
         // Reducers related to searching a song
@@ -179,7 +188,8 @@ const songsSlice = createSlice({
             state.searchingSongs = false;
             state.searchSongsComplete = false;
             state.searchSongsError = action.payload;
-            toast.error(`Failed to search songs ${action.payload}`)
+            console.error(`Failed to search songs ${action.payload}`);
+            toast.error(`Failed to search songs`);
         },
 
         // Reducer for setting the song state to null

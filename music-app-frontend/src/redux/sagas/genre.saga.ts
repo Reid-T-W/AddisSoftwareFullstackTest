@@ -20,7 +20,7 @@ function* fetchGenresWorker(): SagaIterator  {
       const genres: IGenre[] = yield call(getGenresApiCall)
       yield put(fetchGenresSucceeded(genres))
     } catch (e: any) {
-      yield put(fetchGenresFailed(e.message))
+      yield put(fetchGenresFailed(e.response ? e.response.data.message : e.message))
     }
   }
 
@@ -31,7 +31,7 @@ function* searchGenreWorker(action: any): SagaIterator  {
     const albums: IGenre[] = yield call(searchGenresApiCall, action.payload)
     yield put(searchGenresSucceeded(albums))
   } catch (e: any) {
-    yield put(searchGenresFailed(e.message))
+    yield put(searchGenresFailed(e.response ? e.response.data.message : e.message))
   }
 }
 

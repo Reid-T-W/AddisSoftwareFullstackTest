@@ -19,7 +19,7 @@ function* fetchAlbumsWorker(): SagaIterator  {
       const albums: IAlbum[] = yield call(getAlbumsApiCall)
       yield put(fetchAlbumsSucceeded(albums))
     } catch (e: any) {
-      yield put(fetchAlbumsFailed(e.message))
+      yield put(fetchAlbumsFailed(e.response ? e.response.data.message : e.message))
     }
   }
 
@@ -30,7 +30,7 @@ function* searchAlbumWorker(action: any): SagaIterator  {
     const albums: IAlbum[] = yield call(searchAlbumsApiCall, action.payload)
     yield put(searchAlbumsSucceeded(albums))
   } catch (e: any) {
-    yield put(searchAlbumsFailed(e.message))
+    yield put(searchAlbumsFailed(e.response ? e.response.data.message : e.message));
   }
 }
 

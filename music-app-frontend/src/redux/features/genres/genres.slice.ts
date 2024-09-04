@@ -50,7 +50,8 @@ const genreSlice = createSlice({
             state.loadingGenres = false;
             state.genresFetched = false;
             state.fetchGenresError = action.payload;
-            toast.error(`Failed to fetch genres ${action.payload}`)
+            console.error(`Failed to fetch genres ${action.payload}`)
+            toast.error(`Failed to fetch genres`)
         },
         // Reducers related to searching genres
         searchGenresRequested: (state: any) => {
@@ -67,7 +68,8 @@ const genreSlice = createSlice({
             state.searchingGenres = false;
             state.searchGenresComplete = false;
             state.searchGenresError = action.payload;
-            toast.error(`Failed to search genres ${action.payload}`)
+            console.error(`Failed to search genres ${action.payload}`)
+            toast.error(`Failed to search genres`)
         },
     }
 })

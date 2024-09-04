@@ -50,7 +50,8 @@ const albumsSlice = createSlice({
             state.loadingAlbums = false;
             state.albumsFetched = false;
             state.fetchAlbumsError = action.payload;
-            toast.error(`Failed to fetch albums ${action.payload}`)
+            console.error(`Failed to fetch albums ${action.payload}`);
+            toast.error(`Failed to fetch albums`);
         },
         // Reducers related searching albums
         searchAlbumsRequested: (state: any) => {
@@ -67,7 +68,8 @@ const albumsSlice = createSlice({
             state.searchingAlbums = false;
             state.searchAlbumsComplete = false;
             state.searchAlbumsError = action.payload;
-            toast.error(`Failed to search albums ${action.payload}`)
+            console.error(`Failed to search albums ${action.payload}`);
+            toast.error(`Failed to search albums`);
         },
     }
 })

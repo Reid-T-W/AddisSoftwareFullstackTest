@@ -39,7 +39,7 @@ function* fetchSongsWorker(): SagaIterator  {
       const songs: ISong[] = yield call(getSongsApiCall)
       yield put(fetchSongsSucceeded(songs))
     } catch (e: any) {
-      yield put(fetchSongsFailed(e.message))
+      yield put(fetchSongsFailed(e.response ? e.response.data.message : e.message))
     }
   }
 
@@ -57,7 +57,7 @@ function* addSongWorker(action: any): SagaIterator {
     // Call to fetch stats
     yield call(fetchStatsWorker);
   } catch (e: any) {
-    yield put(addSongFailed(e.message))
+    yield put(addSongFailed(e.response ? e.response.data.message : e.message))
   }
 }
 
@@ -68,14 +68,13 @@ function* fetchSongDetailsWorker(action: any): SagaIterator {
     const song: ISong = yield call(getSongDetailsApiCall, action.payload)
     yield put(fetchSongDetailsSucceeded(song))
   } catch (e: any) {
-    yield put(fetchSongDetailsFailed(e.message))
+    yield put(fetchSongDetailsFailed(e.response ? e.response.data.message : e.message))
   }
 }
 
 // worker saga: will be fired on UPDATE_SONG_REQUESTED actions
 function* updateSongWorker(action: any): SagaIterator {
   try {
-    console.log("in update sonw worker")
     yield put(updateSongRequested());
     yield call(updateSongApiCall, action.payload)
     yield put(updateSongSucceeded())
@@ -85,7 +84,7 @@ function* updateSongWorker(action: any): SagaIterator {
     // Call to fetch songs
     yield call(fetchSongsWorker);
   } catch (e: any) {
-    yield put(updateSongFailed(e.message))
+    yield put(updateSongFailed(e.response ? e.response.data.message : e.message))
   }
 }
 
@@ -103,7 +102,7 @@ function* deleteSongWorker(action: any): SagaIterator {
     // Call to fetch stats
     yield call(fetchStatsWorker);
   } catch (e: any) {
-    yield put(deleteSongFailed(e.message))
+    yield put(deleteSongFailed(e.response ? e.response.data.message : e.message))
   }
 }
 
@@ -114,7 +113,7 @@ function* searchSongWorker(action: any): SagaIterator  {
     const songs: ISong[] = yield call(searchSongsApiCall, action.payload)
     yield put(searchSongsSucceeded(songs))
   } catch (e: any) {
-    yield put(searchSongsFailed(e.message))
+    yield put(searchSongsFailed(e.response ? e.response.data.message : e.message))
   }
 }
 

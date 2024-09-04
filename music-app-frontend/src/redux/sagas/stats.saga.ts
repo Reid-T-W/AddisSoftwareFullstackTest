@@ -16,16 +16,12 @@ export function* fetchStatsWorker(): SagaIterator  {
       const stats: IStats = yield call(getStatsApiCall)
       yield put(fetchStatsSucceeded(stats))
     } catch (e: any) {
-      yield put(fetchStatsFailed(e.message))
+      yield put(fetchStatsFailed(e.response ? e.response.data.message : e.message))
     }
   }
 
 
 export function* statsSagas() {
-    // Handles actions related to songs
-    yield takeLatest(StatsActions.GET_STATS_REQUESTED, fetchStatsWorker)
-    // yield takeLatest(SongActions.EDIT_SONG_REQUESTED, editSongWorker)
-    // yield takeLatest(SongActions.DELETE_SONG_REQUESTED, deleteSongWorker)
-    // yield takeLatest(SongActions.ADD_SONG_REQUESTED, addSongWorker)
-    // yield takeLatest(SongActions.SERCH_SONG_REQUESTED, searchSongWorker)
+    // Handles actions related to stats
+    yield takeLatest(StatsActions.GET_STATS_REQUESTED, fetchStatsWorker);
 }

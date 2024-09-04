@@ -19,7 +19,7 @@ function* fetchArtistsWorker(): SagaIterator  {
       const artists: IArtist[] = yield call(getArtistsApiCall)
       yield put(fetchArtistsSucceeded(artists))
     } catch (e: any) {
-      yield put(fetchArtistsFailed(e.message))
+      yield put(fetchArtistsFailed(e.response ? e.response.data.message : e.message))
     }
   }
 
@@ -30,7 +30,7 @@ function* searchArtistWorker(action: any): SagaIterator  {
     const albums: IArtist[] = yield call(searchArtistsApiCall, action.payload)
     yield put(searchArtistsSucceeded(albums))
   } catch (e: any) {
-    yield put(searchArtistsFailed(e.message))
+    yield put(searchArtistsFailed(e.response ? e.response.data.message : e.message))
   }
 }
 

@@ -50,7 +50,8 @@ const artistSlice = createSlice({
             state.loadingArtists = false;
             state.artistsFetched = false;
             state.fetchArtistsError = action.payload;
-            toast.error(`Failed to fetch artists ${action.payload}`)
+            console.error(`Failed to fetch artists ${action.payload}`);
+            toast.error(`Failed to fetch artists`);
         },
         // Reducers related searching artists
         searchArtistsRequested: (state: any) => {
@@ -67,7 +68,8 @@ const artistSlice = createSlice({
             state.searchingArtists = false;
             state.searchArtistsComplete = false;
             state.searchArtistsError = action.payload;
-            toast.error(`Failed to search artists ${action.payload}`)
+            console.error(`Failed to search artists ${action.payload}`);
+            toast.error(`Failed to search artists`);
         },
     }
 })
