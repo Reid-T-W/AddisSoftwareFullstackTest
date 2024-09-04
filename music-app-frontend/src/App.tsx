@@ -10,6 +10,7 @@ import Genres from './pages/Genres';
 import { Provider } from 'react-redux';
 import SongDetailsView from './pages/Songs/SongDetailsView';
 import store from './redux/store';
+import { ALBUMS_ROUTE, ARTISTS_ROUTE, GENRES_ROUTE, HOME_ROUTE, SONGS_ROUTE } from './utils/constants/routes';
 
 function App() {
 
@@ -26,11 +27,11 @@ function App() {
           <BrowserRouter>
             <Layout>
               <Routes>
-                <Route path="/" element={<Songs />} />
-                <Route path="/songs/:id" element={<SongDetailsView />} />
-                <Route path="/albums" element={<Albums />} />
-                <Route path="/artists" element={<Artists />} />
-                <Route path="/genres" element={<Genres />} />
+                <Route path={HOME_ROUTE} element={<Songs />} />
+                <Route path={`${SONGS_ROUTE}/:id`} element={<SongDetailsView />} />
+                <Route path={ALBUMS_ROUTE} element={<Albums />} />
+                <Route path={ARTISTS_ROUTE} element={<Artists />} />
+                <Route path={GENRES_ROUTE} element={<Genres />} />
               </Routes>
             </Layout>
           </BrowserRouter>

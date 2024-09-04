@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
-import { 
-    SONGS_ROUTE,
+import {
     ARTISTS_ROUTE,
     ALBUMS_ROUTE,
-    GENRES_ROUTE
+    GENRES_ROUTE,
+    HOME_ROUTE
 } from '../../utils/constants/routes';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { RootState } from '../../redux/store';
@@ -63,7 +63,7 @@ const HorizontalMenu = () => {
         <MenuItem 
           color={selectedTab === 'songs' ? 'orange' : 'white'} 
           onClick={() => handleClick({
-              route: SONGS_ROUTE,
+              route: HOME_ROUTE,
               tab: 'songs'
             })
           }
