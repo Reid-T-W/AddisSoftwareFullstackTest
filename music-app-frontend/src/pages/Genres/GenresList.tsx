@@ -4,6 +4,7 @@ import emotionStyled from '@emotion/styled';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { RootState } from '../../redux/store';
 import { GenreActions } from '../../utils/constants/actions';
+import { Types } from '../../utils/constants/types';
 
 const Container = emotionStyled.div`
   display: flex;
@@ -29,7 +30,7 @@ const GenresList = () => {
     <Container>
       {genres? (
         genres.map(genre => (
-          <Card type="genres" genre={genre}/>
+          <Card type={Types.genres} genre={genre}/>
         ))
       ) : (
         <h1>Loading...</h1>

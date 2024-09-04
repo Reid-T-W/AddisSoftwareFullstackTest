@@ -4,6 +4,7 @@ import AlbumsList from '../Albums/AlbumsList';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../../redux/hooks';
 import { setSelectedTab } from '../../redux/features/settings/settings.slice';
+import { Types } from '../../utils/constants/types';
 
 const Container = emotionStyled.div`
   display: flex;
@@ -37,13 +38,13 @@ const AlbumsView = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-      dispatch(setSelectedTab("albums"));
+      dispatch(setSelectedTab(Types.albums));
     }, [])
 
     return (
         <Container>
           <RowContainer>
-            <Search type="albums" placeholder={"Search albums by name or artist name"}/>
+            <Search type={Types.albums} placeholder={"Search albums by name or artist name"}/>
           </RowContainer>
           <ScrollableBox>
             <AlbumsList />

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { Types } from '../../../utils/constants/types'
 
 // Define a type for the slice state
 interface SettingsState {
@@ -8,7 +9,7 @@ interface SettingsState {
 
 // Defining an initial state
 const initialState: SettingsState = {
-    selectedTab: "songs",
+    selectedTab: Types.songs,
 }
 
 const settingsSlice = createSlice({

@@ -4,6 +4,7 @@ import emotionStyled from '@emotion/styled';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { RootState } from '../../redux/store';
 import { AlbumActions } from '../../utils/constants/actions';
+import { Types } from '../../utils/constants/types';
 
 const Container = emotionStyled.div`
   display: flex;
@@ -29,7 +30,7 @@ const AlbumsList = () => {
     <Container>
       {albums? (
         albums.map(album => (
-          <Card type="albums" album={album}/>
+          <Card type={Types.albums} album={album}/>
         ))
       ) : (
         <h1>Loading...</h1>

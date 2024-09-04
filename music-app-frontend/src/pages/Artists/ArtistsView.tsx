@@ -4,6 +4,7 @@ import ArtistsList from './ArtistsList';
 import { useAppDispatch } from '../../redux/hooks';
 import { useEffect } from 'react';
 import { setSelectedTab } from '../../redux/features/settings/settings.slice';
+import { Types } from '../../utils/constants/types';
 
 const Container = emotionStyled.div`
   display: flex;
@@ -31,19 +32,19 @@ const RowContainer = emotionStyled.div`
   align-items: baseline;
 `
 const ArtistsView = () => {
-  
+
     // When artists view is loaded the selected tab
     // should be artists.
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-      dispatch(setSelectedTab("artists"));
+      dispatch(setSelectedTab(Types.artists));
     }, [])
 
     return (
         <Container>
           <RowContainer>
-            <Search type="artists" placeholder={"Search artists by name"}/>
+            <Search type={Types.artists} placeholder={"Search artists by name"}/>
           </RowContainer>
           <ScrollableBox>
             <ArtistsList />

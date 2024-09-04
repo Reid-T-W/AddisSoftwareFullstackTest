@@ -11,6 +11,7 @@ import { SongActions } from '../../../utils/constants/actions';
 import { FaExpandAlt } from "react-icons/fa";
 import { RootState } from '../../../redux/store';
 import { ImSpinner6 } from "react-icons/im";
+import { Types } from '../../../utils/constants/types';
 
 interface CardContentProps {
   stats?: boolean;
@@ -185,14 +186,13 @@ const Card:React.FC<CardProps> = ({
   }
   return (
     <>
-      {/* If type of card is songs and song is not undefined, 
-      then display songCard. If type of card is stats, then
-       display statsCard. */}
-      {type === "songs" && song && songCard(song)}
-      {type === "albums" && album && albumCard(album)}
-      {type === "artists" && artist && artistCard(artist)}
-      {type === "genres" && genre && genreCard(genre)}
-      {type === "stats" && statsCard(content?content:'')}
+      {/* Display the proper card based on type and the 
+      data being undefined. */}
+      {type === Types.songs && song && songCard(song)}
+      {type === Types.albums && album && albumCard(album)}
+      {type === Types.artists && artist && artistCard(artist)}
+      {type === Types.genres && genre && genreCard(genre)}
+      {type === Types.stats && statsCard(content?content:'')}
     </>
   )
 }

@@ -4,6 +4,7 @@ import GenresList from './GenresList';
 import { useAppDispatch } from '../../redux/hooks';
 import { useEffect } from 'react';
 import { setSelectedTab } from '../../redux/features/settings/settings.slice';
+import { Types } from '../../utils/constants/types';
 
 
 const Container = emotionStyled.div`
@@ -37,12 +38,12 @@ const GenresView = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-      dispatch(setSelectedTab("genres"));
+      dispatch(setSelectedTab(Types.genres));
     }, [])
     return (
         <Container>
           <RowContainer>
-            <Search type="genres" placeholder={"Search genres by name"}/>
+            <Search type={Types.genres} placeholder={"Search genres by name"}/>
           </RowContainer>
           <ScrollableBox>
             <GenresList />

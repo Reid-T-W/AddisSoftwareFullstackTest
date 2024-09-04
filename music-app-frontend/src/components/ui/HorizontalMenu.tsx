@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { RootState } from '../../redux/store';
 import { setSelectedTab } from '../../redux/features/settings/settings.slice';
 import { useNavigate } from 'react-router-dom';
+import { Types } from '../../utils/constants/types';
 
 interface MenuItemProps {
   color: string;
@@ -61,40 +62,40 @@ const HorizontalMenu = () => {
   return (
     <HorizontalMenuContainer>
         <MenuItem 
-          color={selectedTab === 'songs' ? 'orange' : 'white'} 
+          color={selectedTab === Types.songs ? 'orange' : 'white'} 
           onClick={() => handleClick({
               route: HOME_ROUTE,
-              tab: 'songs'
+              tab: Types.songs,
             })
           }
         >
           <h3>Songs</h3>
         </MenuItem>
         <MenuItem 
-          color={selectedTab === 'artists' ? 'orange' : 'white'} 
+          color={selectedTab === Types.artists ? 'orange' : 'white'} 
           onClick={() => handleClick({
               route: ARTISTS_ROUTE,
-              tab: 'artists'
+              tab: Types.artists,
             })
           }
         >
           <h3>Artists</h3>
         </MenuItem>
         <MenuItem 
-          color={selectedTab === 'albums' ? 'orange' : 'white'}
+          color={selectedTab === Types.albums ? 'orange' : 'white'}
           onClick={() => handleClick({
             route: ALBUMS_ROUTE,
-            tab: 'albums'
+            tab: Types.albums,
           })
         }
         >
           <h3>Albums</h3>
         </MenuItem>
         <MenuItem 
-          color={selectedTab === 'genres' ? 'orange' : 'white'}
+          color={selectedTab === Types.genres ? 'orange' : 'white'}
           onClick={() => handleClick({
             route: GENRES_ROUTE,
-            tab: 'genres'
+            tab: Types.genres,
           })
         }
         >

@@ -4,6 +4,7 @@ import emotionStyled from '@emotion/styled';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { RootState } from '../../redux/store';
 import { SongActions } from '../../utils/constants/actions';
+import { Types } from '../../utils/constants/types';
 
 const Container = emotionStyled.div`
   display: flex;
@@ -29,7 +30,7 @@ const SongsList = () => {
     <Container>
       {songs? (
         songs.map(song => (
-          <Card type="songs" song={song}/>
+          <Card type={Types.songs} song={song}/>
         ))
       ) : (
         <h1>Loading...</h1>

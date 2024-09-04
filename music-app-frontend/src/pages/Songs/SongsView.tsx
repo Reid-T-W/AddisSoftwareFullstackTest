@@ -6,6 +6,7 @@ import SongForm from './SongForm';
 import SongsList from './SongsList';
 import { useAppDispatch } from '../../redux/hooks';
 import { setSelectedTab } from '../../redux/features/settings/settings.slice';
+import { Types } from '../../utils/constants/types';
 
 const Container = emotionStyled.div`
   display: flex;
@@ -45,13 +46,13 @@ const SongsView = () => {
   // When songs view is loaded the selected tab
   // should be songs. 
   useEffect(() => {
-    dispatch(setSelectedTab("songs"));
+    dispatch(setSelectedTab(Types.songs));
   }, [])
   
   return (
     <Container>
       <RowContainer>
-        <Search type="songs" placeholder={"Search songs by title, artist, album, or genre"}/>
+        <Search type={Types.songs} placeholder={"Search songs by title, artist, album, or genre"}/>
         <ButtonStyled 
           onClick={handleClick}
           color={'#636363'}
