@@ -4,8 +4,7 @@ import emotionStyled from '@emotion/styled';
 import { ButtonStyled } from '../../components/ui/Button';
 import SongForm from './SongForm';
 import SongsList from './SongsList';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { RootState } from '../../redux/store';
+import { useAppDispatch } from '../../redux/hooks';
 import { setSelectedTab } from '../../redux/features/settings/settings.slice';
 
 const Container = emotionStyled.div`
