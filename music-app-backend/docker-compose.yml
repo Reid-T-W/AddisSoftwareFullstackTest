@@ -8,8 +8,7 @@ services:
       context: .
     environment:
       - PORT=${PORT}
-      - MONGO_URI=${DB_CONNECTION}
-    command: npm start
+      - DB_CONNECTION=${DB_CONNECTION}
     ports:
       - ${PORT}:${PORT}
     depends_on:
@@ -32,5 +31,5 @@ volumes:
   dbdata6:
 
 networks:
-  node-network:
+  music-app-network:
     driver: bridge
