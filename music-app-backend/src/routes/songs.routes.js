@@ -18,20 +18,21 @@ const {
 // Route to get all songs
 router.get('/', getSongs);
 
-// Route to create a song, with validation and duplicate check middlewares
+// Route to create a song, with body schema validation and duplicate check middlewares
 router.post('/', 
     validateBodySchema(createSongSchema), 
     duplicateCheck, 
     createSong
 );
 
-// Route to get details of a single song
+// Route to get details of a single song with param schema validation middleware
 router.get('/:id', 
     validateIdParamSchema(idParamSchema),
     getSongDetails
 );
 
-// Route to update a song
+// Route to update a song with param and body schema validation middlewares and 
+// duplicate check middleware
 router.put('/:id', 
     validateBodySchema(updateSongSchema),
     validateIdParamSchema(idParamSchema),
@@ -39,7 +40,7 @@ router.put('/:id',
     updateSong
 );
 
-// Route to delete a song
+// Route to delete a song with param schema validation middleware
 router.delete('/:id',
     validateIdParamSchema(idParamSchema), 
     deleteSong

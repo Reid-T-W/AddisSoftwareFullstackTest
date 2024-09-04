@@ -5,12 +5,46 @@
  * /songs:
  *  get:
  *   tags:
- *     - Songs
+ *    - Songs
  *   summary: Get list of songs
  *   description: Get all songs
+ *   parameters:
+ *    - in: query
+ *      name: search
+ *      schema:
+ *       type: string
+ *      description: song title, album or artist name
  *   responses:
  *    200:
- *      description: Songs fetched successfully
+ *     description: Songs fetched successfully
+ *     content:
+ *      application/json:
+ *       schema:
+ *        type: array
+ *        items:
+ *         type: object
+ *         properties:
+ *          _id:
+ *           type: string
+ *           description: song id 
+ *          title:
+ *           type: string
+ *           description: song title 
+ *          artist:
+ *           type: string
+ *           description: song artist 
+ *          album:
+ *           type: string
+ *           description: song album  
+ *          genre:
+ *           type: string
+ *           description: song genre 
+ *          createdAt:
+ *           type: string
+ *           description: song creation date on DB
+ *          updatedAt:
+ *           type: string
+ *           description: last date when song was updated on DB
  */
 
 // CREATE A SONG
@@ -55,5 +89,50 @@
  *     description: Bad request
  */
 
+// GET SONG DETAILS
 
-  
+/**
+ * @openapi
+ * /songs/{id}:
+ *  get:
+ *   tags:
+ *     - Songs
+ *   summary: Get song details
+ *   description: Get details of a single song
+ *   parameters:
+ *    - in: path
+ *      name: id
+ *      schema:
+ *       type: string
+ *      required: true
+ *      description: Song ID
+ *   responses:
+ *    200:
+ *      description: Song details fetched successfully
+ *      content:
+ *       application/json:
+ *        schema:
+ *         type: object
+ *         properties:
+ *          _id:
+ *           type: string
+ *           description: song id 
+ *          title:
+ *           type: string
+ *           description: song title 
+ *          artist:
+ *           type: string
+ *           description: song artist 
+ *          album:
+ *           type: string
+ *           description: song album  
+ *          genre:
+ *           type: string
+ *           description: song genre 
+ *          createdAt:
+ *           type: string
+ *           description: song creation date on DB
+ *          updatedAt:
+ *           type: string
+ *           description: last date when song was updated on DB
+ */
