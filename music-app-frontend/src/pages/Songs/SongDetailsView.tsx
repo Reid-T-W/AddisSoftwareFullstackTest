@@ -12,11 +12,14 @@ import { setSongDeletedToFalse } from '../../redux/features/songs/songs.slice';
 const Container = emotionStyled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
   margin: auto;
-  width: 30%;
-  height: 50%;
+  width: 40%;
+  height: 60%;
   background-color: #242424;
+  border-left: 1px solid orange;
+  border-right: 1px solid orange;
 `;
 
 interface RowContainerProps {
@@ -26,6 +29,7 @@ interface RowContainerProps {
 const RowContainer = emotionStyled.div<RowContainerProps>`
     display: flex;
     flex-direction: row;
+    max-height: 50%;
     justify-content: ${props => props.justifyContent};
     align-items: center;
     margin-bottom: 1rem;
@@ -55,7 +59,13 @@ const SongDetailsView = () => {
     const dispatch = useAppDispatch();
     const deletingSong = useAppSelector((state: RootState) => state.songs.deletingSong);
     const songDeleted = useAppSelector((state: RootState) => state.songs.songDeleted);
+    const song = useAppSelector((state: RootState) => state.songs.song);
     const navigate = useNavigate();
+    
+    // Dispatches an action to get song details
+    useEffect(()=>{
+        dispatch({type: SongActions.GET_SONG_DETAILS_REQUESTED, payload: id});
+    }, [dispatch, id])
 
     const handleClick = () => {
         if (id) {
@@ -75,16 +85,24 @@ const SongDetailsView = () => {
     return (
     <>
         <Container>
-            {/* <ButtonStyled color="orange">Delete</ButtonStyled> */}
-            <RowContainer justifyContent="space-between">
-                <h3>Title</h3>
-                <RowContainer justifyContent="space-around">
-                    <IconButton onClick={handleClick}>
-                        {deletingSong? <ImSpinner6 /> : <MdDelete />}
-                    </IconButton>
-                </RowContainer>
-            </RowContainer>
-            <SongForm type={'editSongForm'}/>
+        {song ? (
+                <>
+                    {/* <ButtonStyled color="orange">Delete</ButtonStyled> */}
+                    <RowContainer justifyContent="space-between">
+                        <h3>{song?.title}</h3>
+                        {/* <RowContainer justifyContent="space-around"> */}
+                        <IconButton onClick={handleClick}>
+                            {deletingSong? <ImSpinner6 /> : <MdDelete />}
+                        </IconButton>
+                        {/* </RowContainer> */}
+                    </RowContainer>
+                    <SongForm type={'editSongForm'} song={song}/>
+                </>
+            ):
+            (
+                <>Loading...</>
+            )}
+            
         </Container>
 
     </>

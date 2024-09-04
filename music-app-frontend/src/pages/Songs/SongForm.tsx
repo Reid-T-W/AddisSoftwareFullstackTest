@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { RootState } from '../../redux/store';
 import { SongActions } from '../../utils/constants/actions';
 import { useParams } from 'react-router-dom';
+import { ISong } from '../../types';
 
 const InputDisplayStyled = emotionStyled.input`
     background: none;
@@ -24,28 +25,22 @@ const InputDisplayStyled = emotionStyled.input`
 const FormStyled = emotionStyled.form`
   display: flex;
   flex-direction: column;
+  width: 70%;
 `;
 
 interface SongFormProps {
+    song?: ISong,
     type?: string,
 }
 
-const SongForm:React.FC<SongFormProps> = ({type}) => {
+const SongForm:React.FC<SongFormProps> = ({type, song}) => {
 
     const dispatch = useAppDispatch();
   
     // FOR EDIT SONG FORM
-    const song = useAppSelector((state: RootState) => state.songs.song);
     const updatingSongDetails = useAppSelector((state: RootState) => state.songs.updatingSongDetails);
     
     const { id } = useParams();
-    // Dispatches an action to get song details
-    useEffect(()=>{
-        if (type==='editSongForm') {
-            dispatch({type: SongActions.GET_SONG_DETAILS_REQUESTED, payload: id});
-        }
-    }, [dispatch, type, id])
-    
     
     // FOR ADD SONG FORM
     const addingSong = useAppSelector((state: RootState) => state.songs.addingSong)
