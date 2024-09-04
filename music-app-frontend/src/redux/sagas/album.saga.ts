@@ -4,7 +4,10 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { 
     fetchAlbumsRequested,
     fetchAlbumsSucceeded,
-    fetchAlbumsFailed
+    fetchAlbumsFailed,
+    searchAlbumsRequested,
+    searchAlbumsSucceeded,
+    searchAlbumsFailed,
  } from "../features/albums/albums.slice";
 import { IAlbum } from "../../types";
 import { getAlbumsApiCall, searchAlbumsApiCall } from "../api/albums.api";
@@ -23,11 +26,11 @@ function* fetchAlbumsWorker(): SagaIterator  {
 // worker saga: will be fired on SEARCH_ALBUM_REQUESTED actions
 function* searchAlbumWorker(action: any): SagaIterator  {
   try {
-    yield put (fetchAlbumsRequested());
+    yield put (searchAlbumsRequested());
     const albums: IAlbum[] = yield call(searchAlbumsApiCall, action.payload)
-    yield put(fetchAlbumsSucceeded(albums))
+    yield put(searchAlbumsSucceeded(albums))
   } catch (e: any) {
-    yield put(fetchAlbumsFailed(e.message))
+    yield put(searchAlbumsFailed(e.message))
   }
 }
 

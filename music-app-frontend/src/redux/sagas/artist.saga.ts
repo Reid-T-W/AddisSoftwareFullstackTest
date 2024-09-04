@@ -3,7 +3,14 @@ import { ArtistActions } from "../../utils/constants/actions";
 import { call, put, takeLatest } from "redux-saga/effects";
 import { IArtist } from "../../types";
 import { getArtistsApiCall, searchArtistsApiCall } from "../api/artists.api";
-import { fetchArtistsFailed, fetchArtistsRequested, fetchArtistsSucceeded } from "../features/artists/artists.slice";
+import { 
+  fetchArtistsFailed, 
+  fetchArtistsRequested, 
+  fetchArtistsSucceeded,
+  searchArtistsRequested,
+  searchArtistsSucceeded,
+  searchArtistsFailed
+ } from "../features/artists/artists.slice";
 
 // worker saga: will be fired on GET_ALBUMS_REQUESTED actions
 function* fetchArtistsWorker(): SagaIterator  {
@@ -19,11 +26,11 @@ function* fetchArtistsWorker(): SagaIterator  {
 // worker saga: will be fired on SEARCH_ARTIST_REQUESTED actions
 function* searchArtistWorker(action: any): SagaIterator  {
   try {
-    yield put (fetchArtistsRequested());
+    yield put (searchArtistsRequested());
     const albums: IArtist[] = yield call(searchArtistsApiCall, action.payload)
-    yield put(fetchArtistsSucceeded(albums))
+    yield put(searchArtistsSucceeded(albums))
   } catch (e: any) {
-    yield put(fetchArtistsFailed(e.message))
+    yield put(searchArtistsFailed(e.message))
   }
 }
 

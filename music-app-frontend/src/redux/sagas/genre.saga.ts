@@ -2,7 +2,14 @@ import { SagaIterator } from "redux-saga";
 import { GenreActions } from "../../utils/constants/actions";
 import { call, put, takeLatest } from "redux-saga/effects";
 import { IGenre } from "../../types";
-import { fetchGenresFailed, fetchGenresRequested, fetchGenresSucceeded } from "../features/genres/genres.slice";
+import { 
+  fetchGenresFailed,
+  fetchGenresRequested, 
+  fetchGenresSucceeded,
+  searchGenresRequested,
+  searchGenresSucceeded,
+  searchGenresFailed,
+ } from "../features/genres/genres.slice";
 import { getGenresApiCall, searchGenresApiCall } from "../api/genres.api";
 
 
@@ -20,11 +27,11 @@ function* fetchGenresWorker(): SagaIterator  {
 // worker saga: will be fired on SEARCH_GENRE_REQUESTED actions
 function* searchGenreWorker(action: any): SagaIterator  {
   try {
-    yield put (fetchGenresRequested());
+    yield put (searchGenresRequested());
     const albums: IGenre[] = yield call(searchGenresApiCall, action.payload)
-    yield put(fetchGenresSucceeded(albums))
+    yield put(searchGenresSucceeded(albums))
   } catch (e: any) {
-    yield put(fetchGenresFailed(e.message))
+    yield put(searchGenresFailed(e.message))
   }
 }
 

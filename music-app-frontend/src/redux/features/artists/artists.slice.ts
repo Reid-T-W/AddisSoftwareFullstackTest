@@ -8,10 +8,13 @@ interface ArtistState {
     artists: IArtist[];
     // Loading indicators
     loadingArtists: boolean,
+    searchingArtists: boolean,
     // Success indicators
     artistsFetched: boolean,
+    searchArtistsComplete: boolean,
     //Errors
     fetchArtistsError: string,
+    searchArtistsError: string,
 }
 
 // Defining an initial state
@@ -19,17 +22,20 @@ const initialState: ArtistState = {
     artists: [],
     // Loading indicators
     loadingArtists: false,
+    searchingArtists: false,
     // Success indicators
     artistsFetched: false,
+    searchArtistsComplete: false,
     //Errors
     fetchArtistsError: '',
+    searchArtistsError: '',
 }
 
 const artistSlice = createSlice({
     name: "artists",
     initialState,
     reducers: {
-        // Reducers related getting songs
+        // Reducers related getting artists
         fetchArtistsRequested: (state: any) => {
             state.loadingArtists = true;
             console.log("Fetching artists ...");
@@ -46,6 +52,23 @@ const artistSlice = createSlice({
             state.fetchArtistsError = action.payload;
             toast.error(`Failed to fetch artists ${action.payload}`)
         },
+        // Reducers related searching artists
+        searchArtistsRequested: (state: any) => {
+            state.searchingArtists = true;
+            console.log("Searching artists ...");
+        },
+        searchArtistsSucceeded: (state: any, action: PayloadAction<IArtist[]>) => {
+            state.searchingArtists = false;
+            state.searchArtistsComplete = true;
+            state.artists = action.payload;
+            console.log("Artists searched successfully");
+        },
+        searchArtistsFailed: (state: any, action: PayloadAction<string>) => {
+            state.searchingArtists = false;
+            state.searchArtistsComplete = false;
+            state.searchArtistsError = action.payload;
+            toast.error(`Failed to search artists ${action.payload}`)
+        },
     }
 })
 
@@ -53,6 +76,9 @@ export const {
     fetchArtistsRequested, 
     fetchArtistsSucceeded,
     fetchArtistsFailed,
+    searchArtistsRequested,
+    searchArtistsSucceeded,
+    searchArtistsFailed,
 } = artistSlice.actions;
 
 export default artistSlice.reducer;

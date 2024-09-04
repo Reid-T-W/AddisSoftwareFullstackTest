@@ -8,10 +8,13 @@ interface GenreState {
     genres: IGenre[];
     // Loading indicators
     loadingGenres: boolean,
+    searchingGenres: boolean,
     // Success indicators
     genresFetched: boolean,
+    searchGenresComplete:boolean;
     //Errors
     fetchGenresError: string,
+    searchGenresError: string,
 }
 
 // Defining an initial state
@@ -19,17 +22,20 @@ const initialState: GenreState = {
     genres: [],
     // Loading indicators
     loadingGenres: false,
+    searchingGenres: false,
     // Success indicators
     genresFetched: false,
+    searchGenresComplete: false,
     //Errors
     fetchGenresError: '',
+    searchGenresError: '',
 }
 
 const genreSlice = createSlice({
     name: "genres",
     initialState,
     reducers: {
-        // Reducers related getting songs
+        // Reducers related to getting genres
         fetchGenresRequested: (state: any) => {
             state.loadingGenres = true;
             console.log("Fetching genres ...");
@@ -46,6 +52,23 @@ const genreSlice = createSlice({
             state.fetchGenresError = action.payload;
             toast.error(`Failed to fetch genres ${action.payload}`)
         },
+        // Reducers related to searching genres
+        searchGenresRequested: (state: any) => {
+            state.searchingGenres = true;
+            console.log("Searching genres ...");
+        },
+        searchGenresSucceeded: (state: any, action: PayloadAction<IGenre[]>) => {
+            state.searchingGenres = false;
+            state.searchGenresComplete = true;
+            state.genres = action.payload;
+            console.log("Genres searched successfully");
+        },
+        searchGenresFailed: (state: any, action: PayloadAction<string>) => {
+            state.searchingGenres = false;
+            state.searchGenresComplete = false;
+            state.searchGenresError = action.payload;
+            toast.error(`Failed to search genres ${action.payload}`)
+        },
     }
 })
 
@@ -53,6 +76,9 @@ export const {
     fetchGenresRequested, 
     fetchGenresSucceeded,
     fetchGenresFailed,
+    searchGenresRequested,
+    searchGenresSucceeded,
+    searchGenresFailed,
 } = genreSlice.actions;
 
 export default genreSlice.reducer;

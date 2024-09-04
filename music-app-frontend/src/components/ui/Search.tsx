@@ -33,10 +33,10 @@ export interface SearchProps {
 
 const Search:React.FC<SearchProps> = ({ type, placeholder }) => {
   const [searchValue, setSearchValue] = useState("");
-  const loadingSongs = useAppSelector((state: RootState) => state.songs.loadingSongs);
-  const loadingAlbums = useAppSelector((state: RootState) => state.albums.loadingAlbums);
-  const loadingArtists = useAppSelector((state: RootState) => state.artists.loadingArtists);
-  const loadingGenres = useAppSelector((state: RootState) => state.genres.loadingGenres);
+  const searchingSongs = useAppSelector((state: RootState) => state.songs.searchingSongs);
+  const searchingAlbums = useAppSelector((state: RootState) => state.albums.searchingAlbums);
+  const searchingArtists = useAppSelector((state: RootState) => state.artists.searchingArtists);
+  const searchingGenres = useAppSelector((state: RootState) => state.genres.searchingGenres);
   const dispatch = useAppDispatch();
 
   const search = (searhValueParam: string) => {
@@ -80,25 +80,25 @@ const Search:React.FC<SearchProps> = ({ type, placeholder }) => {
       {/* Search Button */}
       {type==='songs' && (
         <ButtonStyled color={'#636363'} onClick={handleSearchClick}>
-          {loadingSongs? 'Searching...' : 'Search'}
+          {searchingSongs? 'Searching...' : 'Search'}
         </ButtonStyled>
         )
       }
       {type==='albums' && (
         <ButtonStyled color={'#636363'} onClick={handleSearchClick}>
-          {loadingAlbums? 'Searching...' : 'Search'}
+          {searchingAlbums? 'Searching...' : 'Search'}
         </ButtonStyled>
         )
       }
       {type==='artists' && (
         <ButtonStyled color={'#636363'} onClick={handleSearchClick}>
-          {loadingArtists? 'Searching...' : 'Search'}
+          {searchingArtists? 'Searching...' : 'Search'}
         </ButtonStyled>
         )
       }
       {type==='genres' && (
         <ButtonStyled color={'#636363'} onClick={handleSearchClick}>
-          {loadingGenres? 'Searching...' : 'Search'}
+          {searchingGenres? 'Searching...' : 'Search'}
         </ButtonStyled>
         )
       }    

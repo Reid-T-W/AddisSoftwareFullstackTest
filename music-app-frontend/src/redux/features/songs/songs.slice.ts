@@ -13,6 +13,7 @@ interface SongsState {
     deletingSong: boolean;
     updatingSongDetails: boolean;
     loadingSongDetails: boolean;
+    searchingSongs: boolean;
     
     // Success Indicators
     songFetched: boolean;
@@ -20,6 +21,7 @@ interface SongsState {
     songDeleted: boolean;
     songDetailUpdated: boolean;
     songDetailsFetched: boolean;
+    searchSongsComplete: boolean;
 
     // Errors
     fetchSongsError: string;
@@ -27,6 +29,7 @@ interface SongsState {
     deleteSongError: string;
     getSongDetailsError: string;
     updateSongDetailsError: string;
+    searchSongsError: string;
 
     // Selections
     songToDelete: string;
@@ -43,6 +46,7 @@ const initialState: SongsState = {
     deletingSong: false,
     updatingSongDetails: false,
     loadingSongDetails: false,
+    searchingSongs: false,
 
     // Success indicators
     songFetched: false,
@@ -50,6 +54,7 @@ const initialState: SongsState = {
     songDeleted: false,
     songDetailUpdated: false,
     songDetailsFetched: false,
+    searchSongsComplete: false,
 
     // Error indicators
     fetchSongsError: "",
@@ -57,6 +62,7 @@ const initialState: SongsState = {
     deleteSongError: "",
     getSongDetailsError: "",
     updateSongDetailsError: "",
+    searchSongsError: "",
 
     // Selections
     songToDelete: "",
@@ -66,7 +72,7 @@ const songsSlice = createSlice({
     name: "songs",
     initialState,
     reducers: {
-        // Reducers related getting songs
+        // Reducers related to getting songs
         fetchSongsRequested: (state: any) => {
             state.loadingSongs = true;
             console.log("Fetching songs ...");
@@ -157,6 +163,25 @@ const songsSlice = createSlice({
             toast.error(`Failed to delete song ${action.payload}`)
         },
 
+        // Reducers related to searching a song
+
+        searchSongsRequested: (state: any) => {
+            state.searchingSongs = true;
+            console.log("Searching songs ...");
+        },
+        searchSongsSucceeded: (state: any, action: PayloadAction<ISong[]>) => {
+            state.searchingSongs = false;
+            state.searchSongsComplete = true;
+            state.songs = action.payload;
+            console.log("Songs searched successfully");
+        },
+        searchSongsFailed: (state: any, action: PayloadAction<string>) => {
+            state.searchingSongs = false;
+            state.searchSongsComplete = false;
+            state.searchSongsError = action.payload;
+            toast.error(`Failed to search songs ${action.payload}`)
+        },
+
         // Reducer for setting the song state to null
         setSongToEmpty: (state: any) => {
             state.song = null;
@@ -184,6 +209,9 @@ export const {
     deleteSongRequested,
     deleteSongSucceeded,
     deleteSongFailed,
+    searchSongsRequested,
+    searchSongsSucceeded,
+    searchSongsFailed,
     setSongToEmpty,
     setSongDeletedToFalse
 } = songsSlice.actions;

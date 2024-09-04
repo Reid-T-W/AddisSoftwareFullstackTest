@@ -26,6 +26,9 @@ import {
     deleteSongRequested,
     deleteSongSucceeded,
     deleteSongFailed,
+    searchSongsRequested,
+    searchSongsSucceeded,
+    searchSongsFailed,
 }from '../features/songs/songs.slice'
 import { fetchStatsWorker } from './stats.saga'
 
@@ -107,11 +110,11 @@ function* deleteSongWorker(action: any): SagaIterator {
 // worker saga: will be fired on SEARCH_SONG_REQUESTED actions
 function* searchSongWorker(action: any): SagaIterator  {
   try {
-    yield put (fetchSongsRequested());
+    yield put (searchSongsRequested());
     const songs: ISong[] = yield call(searchSongsApiCall, action.payload)
-    yield put(fetchSongsSucceeded(songs))
+    yield put(searchSongsSucceeded(songs))
   } catch (e: any) {
-    yield put(fetchSongsFailed(e.message))
+    yield put(searchSongsFailed(e.message))
   }
 }
 
