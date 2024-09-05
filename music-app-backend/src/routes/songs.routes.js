@@ -15,23 +15,23 @@ const {
     deleteSong
  } = require('./../controllers/song.controller');
 
-// Route to get all songs
+// GET route to get all songs or search songs by title, album, artist, or genre name
 router.get('/', getSongs);
 
-// Route to create a song, with body schema validation and duplicate check middlewares
+// POST route to create a song, with body schema validation and duplicate check middlewares
 router.post('/', 
     validateBodySchema(createSongSchema), 
     duplicateCheck, 
     createSong
 );
 
-// Route to get details of a single song with param schema validation middleware
+// GET route to get details of a single song with param schema validation middleware
 router.get('/:id', 
     validateIdParamSchema(idParamSchema),
     getSongDetails
 );
 
-// Route to update a song with param and body schema validation middlewares and 
+// PUT route to update a song with param and body schema validation middlewares and 
 // duplicate check middleware
 router.put('/:id', 
     validateBodySchema(updateSongSchema),
@@ -40,7 +40,7 @@ router.put('/:id',
     updateSong
 );
 
-// Route to delete a song with param schema validation middleware
+// DELETE route to delete a song with param schema validation middleware
 router.delete('/:id',
     validateIdParamSchema(idParamSchema), 
     deleteSong

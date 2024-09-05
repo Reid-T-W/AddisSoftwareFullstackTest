@@ -5,7 +5,8 @@ const {
     getArtists
  } = require('./../controllers/artist.controller');
 
-// Route to get all artist and their number of songs and albums
+// GET route to get all artist and their number of songs and albums or
+// search by artist name.
 router.get('/', getArtists);
 
 module.exports = router;

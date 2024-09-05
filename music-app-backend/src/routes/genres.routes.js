@@ -5,7 +5,8 @@ const {
     getGenres
  } = require('./../controllers/genre.controller');
 
-// Route to get all albums
+// GET route to get all genres or search by 
+// genre name
 router.get('/', getGenres);
 
 module.exports = router;
