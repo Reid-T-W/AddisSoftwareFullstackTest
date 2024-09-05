@@ -7,7 +7,7 @@
  *   tags:
  *    - Genres
  *   summary: Get list of Genres along with no of songs
- *   description: Get all genres with the number of songs
+ *   description: Get all genres with the number of songs or search by genre name
  *   parameters:
  *    - in: query
  *      name: search
