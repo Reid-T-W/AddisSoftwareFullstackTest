@@ -12,6 +12,7 @@ const catchAsync = require("../utils/catchAsync");
  * @param {Object} req - Express request object.
  * @param {Object} res - Express response object.
  * @returns {Object} JSON response containing the retrieved list of genres
+ *                   along with the no of songs in each genre
  */
 // eslint-disable-next-line no-unused-vars
 const getGenres = catchAsync(async (req, res, next) => {

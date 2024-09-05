@@ -1,6 +1,8 @@
 /**
  * @fileoverview Album Controller handles all album-related operations.
  * This file defines controllers for getting list of albums.
+ * A unique combination of artist and albums is what defines an album,
+ * This is becuase different artist can have albums with the same name.
  */
 const Song = require("../models/song.model");
 const catchAsync = require("../utils/catchAsync");
@@ -12,6 +14,7 @@ const catchAsync = require("../utils/catchAsync");
  * @param {Object} req - Express request object.
  * @param {Object} res - Express response object.
  * @returns {Object} JSON response containing the retrieved list of albums
+ *                   along with the artist name and no of songs in each album
  */
 // eslint-disable-next-line no-unused-vars
 const getAlbums = catchAsync(async (req, res, next) => {

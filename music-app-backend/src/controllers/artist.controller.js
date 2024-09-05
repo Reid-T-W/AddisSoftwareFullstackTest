@@ -12,6 +12,7 @@ const catchAsync = require("../utils/catchAsync");
  * @param {Object} req - Express request object.
  * @param {Object} res - Express response object.
  * @returns {Object} JSON response containing the retrieved list of artists
+ *                   along with the number of songs and albums they have
  */
 // eslint-disable-next-line no-unused-vars
 const getArtists = catchAsync(async (req, res, next) => {
