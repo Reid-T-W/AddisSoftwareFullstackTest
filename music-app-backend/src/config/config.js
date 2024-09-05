@@ -2,7 +2,7 @@ const logger = require('./logger');
 require('dotenv').config();
 const envVarsSchema = require('./../validations/env.validation');
 
-// Validate the environment variables against the schema.
+// Validate the environment variables against the environment variables schema.
 const { error, value: envVars } = envVarsSchema.validate(process.env);
 
 if (error) {

@@ -3,10 +3,12 @@ const winston = require('winston');
 const { format, createLogger, transports } = winston;
 const { combine, timestamp, printf, colorize } = format;
 
+// Logginf format
 const winstonFormat = printf(({ level, message, timestamp, stack }) => {
   return `${timestamp}: ${level}: ${stack || message}`;
 });
 
+// Creating the winston logger
 const logger = createLogger({
   level: config.env === 'production' ? 'info' : 'debug',
   format: combine(
