@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Stats Controller handles all stats-related operations.
+ * This file defines controllers for getting stats.
+ */
 const Song = require('../models/song.model.js');
 const catchAsync = require('../utils/catchAsync.js');
 
@@ -7,9 +11,7 @@ const catchAsync = require('../utils/catchAsync.js');
  * @function getStats
  * @param {Object} req - Express request object.
  * @param {Object} res - Express response object.
- * @returns {Object} JSON response containing the status and the retrieved data
- *
- * @throws {InternalServerError} If there's an issue with the database or server.
+ * @returns {Object} JSON response containing the retrieved stats object
  */
 
 // eslint-disable-next-line no-unused-vars
@@ -41,17 +43,17 @@ const getStats = catchAsync(async (req, res, next) => {
         }
       ]);
 
-    // get total number of artists
-    const artistsCount = await Song.distinct('artist')
+    // get distinct artists
+    const artists = await Song.distinct('artist')
 
-    // get total number of geners
-    const genresCount = await Song.distinct('genre')
+    // get distinct genres
+    const genres = await Song.distinct('genre')
     
     res.json({
         songsCount: songsCount,
-        artistsCount: artistsCount.length,
+        artistsCount: artists.length,
         albumsCount: albumsCount[0].totalDistinctAlbumCount,
-        genresCount: genresCount.length
+        genresCount: genres.length
     });
   });
   

@@ -1,6 +1,18 @@
+/**
+ * @fileoverview Artists Controller handles all artist-related operations.
+ * This file defines controllers for getting list of artists.
+ */
 const Song = require("../models/song.model");
 const catchAsync = require("../utils/catchAsync");
 
+/**
+ * Get list of artists or search artists by name.
+ *
+ * @function getArtists
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ * @returns {Object} JSON response containing the retrieved list of artists
+ */
 // eslint-disable-next-line no-unused-vars
 const getArtists = catchAsync(async (req, res, next) => {
     const { search } = req.query;

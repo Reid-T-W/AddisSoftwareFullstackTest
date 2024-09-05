@@ -2,8 +2,6 @@
  * @fileoverview Song Controller handles all song-related operations.
  * This file defines controllers for song creation, getting list of songs,
  * getting, updating, and deleting a single song.
- * Requires the following environment variables:
- * - DB_URL: Database connection string.
  */
 const Song = require('../models/song.model.js');
 const catchAsync = require('../utils/catchAsync.js');
@@ -14,27 +12,22 @@ const catchAsync = require('../utils/catchAsync.js');
  * @function createSong
  * @param {Object} req - Express request object.
  * @param {Object} res - Express response object.
- * @returns {Object} JSON response containing the status and a message.
- *
- * @throws {BadRequest} If the request body is empty.
+ * @returns {Object} JSON response containing the status, message, and created song object.
  */
-
 // eslint-disable-next-line no-unused-vars
 const createSong = catchAsync(async (req, res, next) => {
   const newSong = await Song.create(req.body);
   res.status(201).send({ success: true, message: 'Song created successfully', data: newSong });
 });
+
 /**
- * Get list of songs.
+ * Get list of songs or search songs by title, album, artist, or genre name.
  *
  * @function getSongs
  * @param {Object} req - Express request object.
  * @param {Object} res - Express response object.
- * @returns {Object} JSON response containing the status and the retrieved data
- *
- * @throws {InternalServerError} If there's an issue with the database or server.
+ * @returns {Object} JSON response containing the retrieved list of songs
  */
-
 // eslint-disable-next-line no-unused-vars
 const getSongs = catchAsync(async (req, res, next) => {
   const { search } = req.query;
@@ -55,6 +48,14 @@ const getSongs = catchAsync(async (req, res, next) => {
   }
 });
 
+/**
+ * Get song details.
+ *
+ * @function getSongs
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ * @returns {Object} JSON response containing the retrieved song object
+ */
 // eslint-disable-next-line no-unused-vars
 const getSongDetails = catchAsync(async (req, res, next) => {
   const { id } = req.params
@@ -62,6 +63,15 @@ const getSongDetails = catchAsync(async (req, res, next) => {
   res.json(song)
 });
 
+
+/**
+ * Update song.
+ *
+ * @function createSong
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ * @returns {Object} JSON response containing the status, message, and updated song object.
+ */
 // eslint-disable-next-line no-unused-vars
 const updateSong = catchAsync(async (req, res, next) => {
   const { id } = req.params
@@ -70,6 +80,14 @@ const updateSong = catchAsync(async (req, res, next) => {
   res.status(201).send({ success: true, message: 'Song updated successfully', data: updatedSong });
 });
 
+/**
+ * Delete song.
+ *
+ * @function createSong
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ * @returns {Object} JSON response containing the status, message, and deleted song object.
+ */
 // eslint-disable-next-line no-unused-vars
 const deleteSong = catchAsync(async (req, res, next) => {
 
