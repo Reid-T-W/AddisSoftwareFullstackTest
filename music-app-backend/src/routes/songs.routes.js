@@ -5,14 +5,15 @@ const idParamSchema = require('./../validations/params.validation')
 const { 
     validateBodySchema, 
     duplicateCheck,
-    validateIdParamSchema 
+    validateIdParamSchema,
+    recordExists
 } = require('./../middlewares/validate');
 const { 
     createSong, 
     getSongs, 
     getSongDetails,
     updateSong,
-    deleteSong
+    deleteSong,
  } = require('./../controllers/song.controller');
 
 // GET route to get all songs or search songs by title, album, artist, or genre name
@@ -36,6 +37,7 @@ router.get('/:id',
 router.put('/:id', 
     validateBodySchema(updateSongSchema),
     validateIdParamSchema(idParamSchema),
+    recordExists,
     duplicateCheck,
     updateSong
 );
@@ -43,6 +45,7 @@ router.put('/:id',
 // DELETE route to delete a song with param schema validation middleware
 router.delete('/:id',
     validateIdParamSchema(idParamSchema), 
+    recordExists,
     deleteSong
 );
 

@@ -67,9 +67,29 @@ const validateIdParamSchema = (schema) => (req, res, next) => {
   return next();
 };
 
+// Middleware to check if a record exists
+const recordExists = async (req, res, next) => {
+  const { id } = req.params
+  
+  // Check if a song with the same title, artist and album
+  // exitst
+  const song = await Song.exists({ _id: id });
+
+  if (song === null) {
+    // The song does not exist, respond with a 404
+    logger.error('error: ', 'Song with this id does not exist');
+    const errors = 'Song with this id does not exist';
+    next(new ApiError(404, errors));
+  } else {
+    // If no error, call next to proceed
+    return next()
+  }
+}
+
 
 module.exports = {
   validateBodySchema,
   duplicateCheck,
-  validateIdParamSchema
+  validateIdParamSchema,
+  recordExists
 }
