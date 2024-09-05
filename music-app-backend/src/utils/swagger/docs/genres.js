@@ -24,10 +24,11 @@
  *        items:
  *         type: object
  *         properties:
- *          genre:
- *           type: string
- *           description: genre name 
  *          noOfSongs:
  *           type: number
  *           description: number of songs with this genre
+ *          genre:
+ *           type: string
+ *           description: genre name 
+
  */

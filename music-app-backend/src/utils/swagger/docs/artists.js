@@ -24,12 +24,12 @@
  *        items:
  *         type: object
  *         properties:
- *          artist:
- *           type: string
- *           description: artist name 
  *          noOfSongs:
  *           type: number
  *           description: number of songs in the album
+ *          artist:
+ *           type: string
+ *           description: artist name 
  *          noOfAlbums:
  *           type: number
  *           description: number of albums the artist has
