@@ -32,14 +32,36 @@ export interface SearchProps {
     placeholder: string;
 }
 
+ /**
+ * Search Component - This component is responsible for rendering the search bar.
+ * By setting the type and placeholder props, it can be used by all songsView, 
+ * albumsViews, artistView, and genresView components.
+ * 
+ * 
+ * @component
+ * @param {string} props.type - The type of search being performed; songs, albums, artists, or genres.
+ * @param {string} props.placeholder - The placeholder string to be displayed on the search input.
+ * 
+ * @example
+ * <Search type={Types.songs} placeholder={"Search songs by title, artist, album, or genre"}/>
+ * <Search type={Types.albums} placeholder={"Search albums by name or artist name"}/>
+ * 
+ * @returns {JSX.Element} The rendered component
+ */
 const Search:React.FC<SearchProps> = ({ type, placeholder }) => {
-  const [searchValue, setSearchValue] = useState("");
+  
+  // These will be used to render the correct button display, if any of these are true,
+  // button will display as Searching.
   const searchingSongs = useAppSelector((state: RootState) => state.songs.searchingSongs);
   const searchingAlbums = useAppSelector((state: RootState) => state.albums.searchingAlbums);
   const searchingArtists = useAppSelector((state: RootState) => state.artists.searchingArtists);
   const searchingGenres = useAppSelector((state: RootState) => state.genres.searchingGenres);
+
+  const [searchValue, setSearchValue] = useState("");
   const dispatch = useAppDispatch();
 
+  // Search function that dispatches a search action depending on the type (songs, albums,
+  // artists, or genres)
   const search = (searhValueParam: string) => {
     if (type === Types.songs) {
       dispatch({type: SongActions.SEARCH_SONG_REQUESTED, payload: searhValueParam});
@@ -59,10 +81,12 @@ const Search:React.FC<SearchProps> = ({ type, placeholder }) => {
     }
   }
 
+  // Used for searching when the search button is clicked
   const handleSearchClick = () => {
     search(searchValue);
   }
 
+  // Used for searching while typing
   const handleSearchInput = (searchTerm: string) => {
     setSearchValue(searchTerm);
     search(searchTerm);

@@ -84,24 +84,42 @@ export interface CardProps {
   artist?: IArtist;
   album?: IAlbum;
   genre?: IGenre;
-  content?: string;
+  statContent?: string;
 }
 
-
+ /**
+ * Card Component - This component is responsible for rendering the song,
+ * album, artist, genre, and stat card. This will depend on the type, which is 
+ * passed as props.
+ * 
+ * @component
+ * @param {Object} props - The props for the Card component.
+ * @param {string} props.type - The type of card; songs, albums, artists, or genres
+ * @param {ISong} [props.song] - Optional prop that contains the song data
+ * @param {IArtist} [props.artist] - Optional prop that contains the artist data
+ * @param {IAlbum} [props.album] - Optional prop that contains the album data
+ * @param {IGenre} [props.genre] - Optional prop that contains the genre data
+ * @param {string} [props.statContent] - Optional prop that contains the stat data
+ * 
+ * @example
+ * <Card type={Types.songs} song={song}/>
+ * <Card type={Types.stats} statContent={`${stats.songsCount} Songs`}/>
+ * 
+ * @returns {JSX.Element} The rendered component
+ */
 const Card:React.FC<CardProps> = ({
   type,
   song,
   artist,
   album,
   genre,
-  content,
+  statContent,
 }) => {
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const deletingSong = useAppSelector((state: RootState) => state.songs.deletingSong);
   const songToDelete = useAppSelector((state: RootState) => state.songs.songToDelete);
-  console.log("songToDelete: ", songToDelete)
 
   const handleSongCardClick = (id: string) => {
     // Set song state to empty, this will
@@ -114,11 +132,14 @@ const Card:React.FC<CardProps> = ({
   }
 
   const handleSongDelete = (id: string) => {
+    // Handle deletion of song using the id
     if (id) {
       dispatch({type: SongActions.DELETE_SONG_REQUESTED, payload: id});
   }
   }
   
+  // Renders the song card content, given the song
+  // deatils as input
   const songCard = (song: ISong) => {
     return (
       <CardContent>
@@ -140,6 +161,8 @@ const Card:React.FC<CardProps> = ({
     )
   }
 
+  // Renders the album card content, given the album
+  // deatils as input
   const albumCard = (album: IAlbum) => {
     return (
       <CardContent>
@@ -152,6 +175,8 @@ const Card:React.FC<CardProps> = ({
     )
   }
 
+  // Renders the artist card content given the artist details
+  // as input
   const artistCard = (artist: IArtist) => {
     return (
       <CardContent>
@@ -164,6 +189,8 @@ const Card:React.FC<CardProps> = ({
     )
   }
 
+  // Renders the genre card content given the genre details
+  // as input
   const genreCard = (genre: IGenre) => {
     return (
       <CardContent>
@@ -175,11 +202,13 @@ const Card:React.FC<CardProps> = ({
     )
   }
   
-  const statsCard = (content: string) => {
+  // Renders the stats card content given the stat content
+  // as input
+  const statsCard = (statContent: string) => {
   
     return (
       <CardContent stats={true}>
-          <h3>{content}</h3>
+          <h3>{statContent}</h3>
           <FaArrowTrendUp color='orange'/> 
       </CardContent>
     )
@@ -187,12 +216,12 @@ const Card:React.FC<CardProps> = ({
   return (
     <>
       {/* Display the proper card based on type and the 
-      data being undefined. */}
+      data being defined. */}
       {type === Types.songs && song && songCard(song)}
       {type === Types.albums && album && albumCard(album)}
       {type === Types.artists && artist && artistCard(artist)}
       {type === Types.genres && genre && genreCard(genre)}
-      {type === Types.stats && statsCard(content?content:'')}
+      {type === Types.stats && statsCard(statContent?statContent:'')}
     </>
   )
 }

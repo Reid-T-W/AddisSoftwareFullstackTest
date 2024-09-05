@@ -173,7 +173,6 @@ const songsSlice = createSlice({
         },
 
         // Reducers related to searching a song
-
         searchSongsRequested: (state: any) => {
             state.searchingSongs = true;
             console.log("Searching songs ...");

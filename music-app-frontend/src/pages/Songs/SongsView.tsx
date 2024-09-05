@@ -33,7 +33,15 @@ const RowContainer = emotionStyled.div`
   justify-content: center;
   align-items: baseline;
 `
- 
+ /**
+ * SongsView Component - This component is responsible for rendering the songs view.
+ * It holds the list of songs component, search songs component, add song button, and
+ * add song form component.
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} The rendered component
+ */
 const SongsView = () => {
   
   const [addSong, setAddSong] = useState(false);
@@ -52,7 +60,10 @@ const SongsView = () => {
   return (
     <Container>
       <RowContainer>
+        {/* Search Component will be called with type set to songs and a custom placeholder*/}
         <Search type={Types.songs} placeholder={"Search songs by title, artist, album, or genre"}/>
+  
+        {/* Button for adding a song */}
         <ButtonStyled 
           onClick={handleClick}
           color={'#636363'}
@@ -60,10 +71,15 @@ const SongsView = () => {
           {addSong? 'Close' : 'Add Song'}
         </ButtonStyled>
       </RowContainer>
+
+      {/* A form for adding a new song */}
       {addSong && <SongForm type={FormTypes.addSongForm} />}
+      
       <ScrollableBox>
+        {/* List of songs */}
         <SongsList />
       </ScrollableBox>
+
     </Container>
   )
 }

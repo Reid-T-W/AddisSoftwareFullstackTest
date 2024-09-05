@@ -16,6 +16,14 @@ const Container = emotionStyled.div`
   width: 70vw;
 `;
 
+/**
+ * ArtistsList Component - Dispatches an action to get a list
+ * of artists and renders them using the Card Component. 
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} The rendered component
+ */
 const ArtistsList = () => {
   
   const artists = useAppSelector((state: RootState) => state.artists.artists)

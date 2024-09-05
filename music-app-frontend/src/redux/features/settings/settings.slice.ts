@@ -16,7 +16,7 @@ const settingsSlice = createSlice({
     name: "settings",
     initialState,
     reducers: {
-        // Functions related to settings state
+        // Reducers related to settings state
         setSelectedTab: (state: any, action: PayloadAction<string>) => {
             state.selectedTab = action.payload;
             console.log("Updated selected tab to: ", action.payload);

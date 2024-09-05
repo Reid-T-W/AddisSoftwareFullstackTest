@@ -47,9 +47,21 @@ export interface LayoutProps {
     children: ReactNode;
   }
 
+/**
+ * Layout Component - defines the structure of the Music App's main page.
+ * 
+ * @component
+ * @param {ReactNode} props.children - The child components to render within the layout.
+ * @returns {JSX.Element} The layout of the Music App.
+ * 
+ * @example
+ * <Layout>
+ *   <Component />
+ * </Layout>
+ */
 const Layout:React.FC<LayoutProps> = ({ children }) => {
   return (
-    <Container background-color="primary">
+    <Container>
       <Header>
         <h1>Music App</h1>
         <LuSeparatorHorizontal />

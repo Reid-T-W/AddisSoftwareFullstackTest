@@ -13,7 +13,16 @@ import Card from '../../components/ui/Card/Card'
 import { RootState } from '../../redux/store';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { StatsActions } from '../../utils/constants/actions';
+import { Types } from '../../utils/constants/types';
 
+/**
+ * Stats Component - Dispatches an action to get stats
+ * data and renders them using the Card Component. 
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} The rendered component
+ */
 const Stats = () => {
 
   const stats = useAppSelector((state: RootState) => state.stats.stats)
@@ -29,10 +38,10 @@ const Stats = () => {
     <Container>
       {stats? (
         <>
-          <Card type='stats' content={`${stats.songsCount} Songs`}/>
-          <Card type='stats' content={`${stats.albumsCount} Albums`}/>
-          <Card type='stats' content={`${stats.artistsCount} Artists`}/>
-          <Card type='stats' content={`${stats.genresCount} Genres`}/>
+          <Card type={Types.stats} statContent={`${stats.songsCount} Songs`}/>
+          <Card type={Types.stats} statContent={`${stats.albumsCount} Albums`}/>
+          <Card type={Types.stats} statContent={`${stats.artistsCount} Artists`}/>
+          <Card type={Types.stats} statContent={`${stats.genresCount} Genres`}/>
         </>
       ) : (
         <h1>Loading...</h1>

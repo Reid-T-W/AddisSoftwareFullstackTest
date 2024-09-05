@@ -53,7 +53,16 @@ const IconButton = emotionStyled.button`
     `;
 
 
-
+/**
+ * SongDetailsView Component - Using song id passed on url, it 
+ * dispatches an action to get song details and displays it in an 
+ * edit song form component. It also provides an option to delete
+ * the song.
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} The rendered component
+ */
 const SongDetailsView = () => {
 
     const { id } = useParams();
@@ -68,6 +77,7 @@ const SongDetailsView = () => {
         dispatch({type: SongActions.GET_SONG_DETAILS_REQUESTED, payload: id});
     }, [dispatch, id])
 
+    
     const handleClick = () => {
         if (id) {
             dispatch({type: SongActions.DELETE_SONG_REQUESTED, payload: id});

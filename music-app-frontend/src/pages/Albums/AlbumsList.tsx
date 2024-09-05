@@ -16,6 +16,14 @@ const Container = emotionStyled.div`
   width: 70vw;
 `;
 
+/**
+ * AlbumsList Component - Dispatches an action to get a list
+ * of albums and renders them using the Card Component. 
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} The rendered component
+ */
 const AlbumsList = () => {
   
   const albums = useAppSelector((state: RootState) => state.albums.albums)

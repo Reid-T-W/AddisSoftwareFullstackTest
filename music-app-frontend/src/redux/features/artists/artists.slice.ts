@@ -35,7 +35,7 @@ const artistSlice = createSlice({
     name: "artists",
     initialState,
     reducers: {
-        // Reducers related getting artists
+        // Reducers related to getting artists
         fetchArtistsRequested: (state: any) => {
             state.loadingArtists = true;
             console.log("Fetching artists ...");

@@ -32,6 +32,15 @@ const RowContainer = emotionStyled.div`
   justify-content: center;
   align-items: baseline;
 `
+
+ /**
+ * GenresView Component - This component is responsible for rendering the genres view.
+ * It holds the list of genres component and search genres component.
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} The rendered component
+ */
 const GenresView = () => {
     // When genres view is loaded the selected tab
     // should be genres.

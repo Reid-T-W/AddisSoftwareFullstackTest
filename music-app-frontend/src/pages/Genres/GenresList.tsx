@@ -16,6 +16,14 @@ const Container = emotionStyled.div`
   width: 70vw;
 `;
 
+/**
+ * Genres Component - Dispatches an action to get a list
+ * of genres and renders them using the Card Component. 
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} The rendered component
+ */
 const GenresList = () => {
   
   const genres = useAppSelector((state: RootState) => state.genres.genres)

@@ -31,6 +31,15 @@ const RowContainer = emotionStyled.div`
   justify-content: center;
   align-items: baseline;
 `
+
+ /**
+ * AlbumsView Component - This component is responsible for rendering the albums view.
+ * It holds the list of albums component and search albums component.
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} The rendered component
+ */
 const AlbumsView = () => {
 
     // When albums view is loaded the selected tab

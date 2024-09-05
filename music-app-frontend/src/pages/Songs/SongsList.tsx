@@ -16,6 +16,14 @@ const Container = emotionStyled.div`
   width: 70vw;
 `;
 
+/**
+ * SongsList Component - Dispatches an action to get a list
+ * of songs and renders them using the Card Component. 
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} The rendered component
+ */
 const SongsList = () => {
   
   const songs = useAppSelector((state: RootState) => state.songs.songs)

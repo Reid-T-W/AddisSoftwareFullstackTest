@@ -31,6 +31,15 @@ const RowContainer = emotionStyled.div`
   justify-content: center;
   align-items: baseline;
 `
+
+ /**
+ * ArtistsView Component - This component is responsible for rendering the artists view.
+ * It holds the list of artists component and search artists component.
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} The rendered component
+ */
 const ArtistsView = () => {
 
     // When artists view is loaded the selected tab

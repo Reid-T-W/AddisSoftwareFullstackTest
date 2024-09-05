@@ -48,16 +48,25 @@ const MenuItem = styled.a<MenuItemProps>`
 }
 `;
 
+/**
+ * HorizontalMenu Component - Displays the horizontal menu, that
+ * lets users select between songs, artists, albums and genres pages. 
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} The rendered component
+ */
 const HorizontalMenu = () => {
   const navigate = useNavigate();
   const selectedTab = useAppSelector((state: RootState) => state.settings.selectedTab)
   const dispatch = useAppDispatch();
   
   const handleClick = (data: HandleClickedProps) => {
+    // Navigate to the selected route
     navigate(data.route);
+    // Disptacht an action to set the selected tab
     dispatch(setSelectedTab(data.tab));
   }
-
 
   return (
     <HorizontalMenuContainer>

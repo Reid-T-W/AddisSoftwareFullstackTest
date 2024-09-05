@@ -19,7 +19,7 @@ const statsSlice = createSlice({
     name: "stats",
     initialState,
     reducers: {
-        // Functions related to stats state
+        // Reucers related to stats state
         fetchStatsRequested: (state: any) => {
             state.loadingStats = true;
             console.log("Fetching stats ...");

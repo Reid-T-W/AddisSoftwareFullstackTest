@@ -35,7 +35,7 @@ const albumsSlice = createSlice({
     name: "albums",
     initialState,
     reducers: {
-        // Reducers related getting albums
+        // Reducers related to getting albums
         fetchAlbumsRequested: (state: any) => {
             state.loadingAlbums = true;
             console.log("Fetching albums ...");
@@ -53,6 +53,7 @@ const albumsSlice = createSlice({
             console.error(`Failed to fetch albums ${action.payload}`);
             toast.error(`Failed to fetch albums`);
         },
+        
         // Reducers related searching albums
         searchAlbumsRequested: (state: any) => {
             state.searchingAlbums = true;

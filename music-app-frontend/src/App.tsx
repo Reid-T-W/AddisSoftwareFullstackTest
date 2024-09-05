@@ -13,7 +13,6 @@ import store from './redux/store';
 import { ALBUMS_ROUTE, ARTISTS_ROUTE, GENRES_ROUTE, HOME_ROUTE, SONGS_ROUTE } from './utils/constants/routes';
 
 function App() {
-
   return (
     <>
       <ToastContainer

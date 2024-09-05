@@ -33,10 +33,25 @@ const FormStyled = emotionStyled.form<FormStyledProps>`
 `;
 
 interface SongFormProps {
+    type: string,
     song?: ISong,
-    type?: string,
 }
 
+ /**
+ * SongForm Component - This component is responsible for rendering the add song
+ * and edit song forms. It can handle both add and edit forms by passing in the 
+ * type as a prop.
+ * 
+ * @component
+ * @param {string} props.type - The type of form to display, add or edit song form.
+ * @param {string} [props.song] - Optional song details to be used when type is edit song form.
+ * 
+ * @example
+ * <SongForm type={FormTypes.editSongForm} song={song}/>
+ * <SongForm type={FormTypes.addSongForm} />
+ * 
+ * @returns {JSX.Element} The rendered component
+ */
 const SongForm:React.FC<SongFormProps> = ({type, song}) => {
 
     const dispatch = useAppDispatch();
@@ -65,6 +80,9 @@ const SongForm:React.FC<SongFormProps> = ({type, song}) => {
         genre : string;
     }
 
+    // Initial values of form, if the type prop is editSongForm, the details of 
+    // of the song will be populated. But if the type is addSongForm the form
+    // values will be initialized to empty.
     const initialValues: FormValues = {
         title: type === FormTypes.editSongForm && song ? song?.title : '',
         artist: type === FormTypes.editSongForm && song ? song?.artist : '',
@@ -72,6 +90,7 @@ const SongForm:React.FC<SongFormProps> = ({type, song}) => {
         genre: type === FormTypes.editSongForm && song ? song?.genre : '',
     };
 
+    // Validation schema used for form
     const validationSchema = Yup.object({
         title: Yup.string().max(50).required('Song Title is required'),
         artist: Yup.string().max(50).required('Artist is required'),
@@ -79,11 +98,13 @@ const SongForm:React.FC<SongFormProps> = ({type, song}) => {
         genre: Yup.string().max(50).required('Genre is required'),    
     })
 
+    // Setup formik
     const formik = useFormik({
     initialValues,
     enableReinitialize: true,
     validationSchema,
     onSubmit: async (values) => {
+        // On Submit the proper action will be dispatched based on the type prop
         if (type === FormTypes.addSongForm) {
             dispatch({type: SongActions.ADD_SONG_REQUESTED, payload: values});
         } else if (type === FormTypes.editSongForm && id) {
