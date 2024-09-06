@@ -1,8 +1,8 @@
 # Music App
 ## Table of Contents  
 [Introduction](#introduction)  
-[Implemented Business Features](#implemented-features)   
-[Deployments](#deployments)
+[Implemented Business Features](#implemented-business-features)   
+[Deployments](#deployments)   
 [Running Backend locally  ](#running-backend-locally)  
 [Running the Frontend locally](#running-the-frontend-locally)  
 [Tech Stack](#tech-stack)  
