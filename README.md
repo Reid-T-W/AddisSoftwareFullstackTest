@@ -16,7 +16,7 @@ different filters is also supported.
 [Back to Top](#table-of-contents) 
 
 ## Demo Video  
-[![Demo video for music-app](https://github.com/Reid-T-W/AddisSoftwareInternshipTest/blob/master/music-app-demo-video-thumbnail.png)](https://www.loom.com/share/1e1094d3c86644d58198460073e5d945?sid=5ad744b0-d7b9-487e-9a1d-2bb66a749b70)  
+[![Demo video for music-app](https://github.com/Reid-T-W/AddisSoftwareFullstackTest/blob/main/Music%20app%20cover.png)](https://www.loom.com/share/1e1094d3c86644d58198460073e5d945?sid=5ad744b0-d7b9-487e-9a1d-2bb66a749b70)  
 ## Implemented Business Features  
 - [x] View list of songs.
 - [x] Add a new song.
