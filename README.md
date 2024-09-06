@@ -3,6 +3,7 @@
 [Introduction](#introduction)  
 [Implemented Business Features](#implemented-business-features)   
 [Deployments](#deployments)   
+[Documentation](#documentation)  
 [Running Backend locally  ](#running-backend-locally)  
 [Running the Frontend locally](#running-the-frontend-locally)  
 [Tech Stack](#tech-stack)  
