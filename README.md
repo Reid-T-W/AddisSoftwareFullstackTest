@@ -1,8 +1,7 @@
 # Music App
 ## Table of Contents  
 [Introduction](#introduction)  
-[Implemented Business Features](#implemented-business-features)  
-[Implemented Technical Features](#implemented-technical-features)  
+[Implemented Business Features](#implemented-features)   
 [Deployments](#deployments)
 [Running Backend locally  ](#running-backend-locally)  
 [Running the Frontend locally](#running-the-frontend-locally)  
@@ -11,8 +10,7 @@
 [Licensing](#licensing)  
 
 ## Introduction  
-An app that is built for the Addis Software fullstack test. It can help view a list of saved songs. It also supports adding, updating, and deletion of a song. Moreover it also displays stats of songs, albums, artists and genres. Searching by
-different filters is also supported.  
+An app that is built for the Addis Software fullstack test. It can help view a list of saved songs. It also supports adding, updating, and deletion of a song. Moreover it also displays stats of songs, albums, artists and genres. Searching by different criterias is also supported.  
 [Back to Top](#table-of-contents) 
 
 ## Demo Video  
@@ -21,12 +19,12 @@ different filters is also supported.
 - [x] View list of songs.
 - [x] Add a new song.
 - [x] View details of a song.
-- [x] Update a song from details song details view.
-- [x] Delete a song from list view of song detial view.
+- [x] Update song details.
+- [x] Delete a song from list view and song detials view.
 - [x] Search song by title, album, artist, or genre name.
 - [x] View total number of songs, albums, artists, and genres in the system.
 - [x] View list of artist along with no of songs and albums stats.
-- [x] Search artists by name to display their info (no of song and album).
+- [x] Search artists by name to display their info (no of songs and albums).
 - [x] View list of albums along with artist name and no of songs stats.
 - [x] Search albums by name or artist name to display their info (artist and no of songs).
 - [x] View list of genres along with no of songs stats.
@@ -34,8 +32,8 @@ different filters is also supported.
 [Back to Top](#table-of-contents) 
 
 ## Deployments   
-Frontend is deployed on vercel [Deployment link](https://addis-software-fullstack-test.vercel.app/)  
-Backend is deployed on render [Deployment link](https://addissoftwarefullstacktest.onrender.com/api/v1)  
+Frontend is deployed on vercel [Frontend Deployment link](https://addis-software-fullstack-test.vercel.app/)  
+Backend is deployed on render [Backend Deployment link](https://addissoftwarefullstacktest.onrender.com/docs)  
 [Back to Top](#table-of-contents) 
 
 ## Documentation
@@ -54,12 +52,14 @@ Cd into the backend directory
 
 Setup your .env file using the example specified in the .env.example file
 As this is a demo, for the sake of simplicity I have put the db url on the .env.example file.
-<!-- (i.e. as the app makes use of MongoDB Atlas you will need to create a database on MongoDB Atlas and use that uri in your .env file)     -->
 
 run docker compose up  
 ```bash
     docker compose up  
-```  
+``` 
+
+This will spin up two containers; the mogodb container and a backend api container which is 
+connected to the mongodb container.
 [Back to Top](#table-of-contents) 
 
 ### Without docker
@@ -73,7 +73,7 @@ Cd into the music-app-backend directory
 ```
 
 Setup your .env file using the example specified in the .env.example file
-i.e. as the app makes use of MongoDB Atlas you will need to create a database on MongoDB Atlas and use that uri in your .env file
+i.e. The exmpale connection string added to the DB_CONNECTION var in the .env.example file is for the docker container, you can add your own mongo db url when running without docker.
 
 Install dependencies
 ```bash
