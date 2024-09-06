@@ -10,7 +10,7 @@
 [Licensing](#licensing)  
 
 ## Introduction  
-An app that is built for the Addis Software fullstack test. It can help view a list of saved songs. It also supports adding, updating, and deletion of a song. Moreover it also displays stats of songs, albums, artists and genres. Searching by different criterias is also supported.  
+An app that is built for the Addis Software fullstack test. It can help view a list of saved songs. It also supports adding, updating, and deletion of a song. Moreover it also provides different stats(total number of songs, albums, artists and genres, number of songs and albums an artist has, number of songs an album has, and number of songs a genre has). Searching by different criterias is also supported.  
 [Back to Top](#table-of-contents) 
 
 ## Demo Video  
@@ -23,6 +23,7 @@ An app that is built for the Addis Software fullstack test. It can help view a l
 - [x] Delete a song from list view and song detials view.
 - [x] Search song by title, album, artist, or genre name.
 - [x] View total number of songs, albums, artists, and genres in the system.
+- [x] When Viewing total number of albums a unique combination of album and artist makes one album, this will help in cases where two artists have albums with the same name, as they should be counted as separate albums.
 - [x] View list of artist along with no of songs and albums stats.
 - [x] Search artists by name to display their info (no of songs and albums).
 - [x] View list of albums along with artist name and no of songs stats.
@@ -50,7 +51,7 @@ Cd into the backend directory
     cd music-app-backend  
 ```
 
-Setup your .env file using the example specified in the .env.example file
+Setup your .env file using the example specified in the .env.example file.  
 As this is a demo, for the sake of simplicity I have put the db url on the .env.example file.
 
 run docker compose up  
@@ -72,7 +73,7 @@ Cd into the music-app-backend directory
     cd music-app-backend  
 ```
 
-Setup your .env file using the example specified in the .env.example file
+Setup your .env file using the example specified in the .env.example file.  
 i.e. The exmpale connection string added to the DB_CONNECTION var in the .env.example file is for the docker container, you can add your own mongo db url when running without docker.
 
 Install dependencies
