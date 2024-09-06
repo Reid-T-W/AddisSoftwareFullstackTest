@@ -62,8 +62,7 @@ run docker compose up
 ``` 
 
 This will spin up two containers; the mogodb container and a backend api container which is 
-connected to the mongodb container.
-[Back to Top](#table-of-contents) 
+connected to the mongodb container.  
 
 ### Without docker
 Clone the repo  
@@ -85,7 +84,8 @@ Install dependencies
 Run the project
 ```
     npm run dev
-```
+```  
+[Back to Top](#table-of-contents) 
 
 ## Running the Frontend locally
 Clone the repo  
