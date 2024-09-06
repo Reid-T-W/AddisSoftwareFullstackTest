@@ -51,9 +51,9 @@ const getStats = catchAsync(async (req, res, next) => {
     
     res.json({
         songsCount: songsCount,
-        artistsCount: artists.length,
-        albumsCount: albumsCount[0].totalDistinctAlbumCount,
-        genresCount: genres.length
+        artistsCount: artists ? artists.length:0,
+        albumsCount: albumsCount.length > 0 ? albumsCount[0].totalDistinctAlbumCount : 0,
+        genresCount: genres ? genres.length : 0,
     });
   });
   
