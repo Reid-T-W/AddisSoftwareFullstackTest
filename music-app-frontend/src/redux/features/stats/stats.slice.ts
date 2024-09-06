@@ -31,7 +31,8 @@ const statsSlice = createSlice({
         },
         fetchStatsFailed: (state: any, action: PayloadAction<string>) => {
             state.loadingStats = false
-            toast.error(`Failed to fetch stats ${action.payload}`)
+            console.error(`Failed to fetch stats ${action.payload}`)
+            toast.error('Failed to fetch stats')
         },
     }
 })

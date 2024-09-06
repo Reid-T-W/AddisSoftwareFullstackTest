@@ -149,7 +149,11 @@ const songsSlice = createSlice({
             state.songDetailUpdated = false;
             state.updateSongDetailsError = action.payload;
             console.error(`Failed to update song ${action.payload}`)
-            toast.error(`Failed to update song`)
+            if (action.payload === "Song with same title, artist and album exists") {
+                toast.error(`Failed to update song ${action.payload}`);
+            } else {
+                toast.error(`Failed to update song`)
+            } 
         },
 
         // Reducers related to deleting a song
